@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://getface.netlify.app/sitemap.xml
