@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portrait Photography Tips for Better Face Analysis | Face Portal</title>
+  <meta name="description" content="Camera settings, focal length, lighting setups and composition principles for taking sharp, useful portrait photographs that produce better AI analysis results.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/portrait-photography-tips/">
+  <meta property="og:title" content="Portrait Photography Tips for Better Face Analysis">
+  <meta property="og:description" content="Camera settings, focal lengths, lighting setups and composition for sharp portraits that work well with AI analysis.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Portrait Photography Tips</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">PHOTOGRAPHY</div>
+          <h1>Portrait Photography Tips for Better Face Analysis</h1>
+          <p class="article-tagline">Camera settings, focal lengths, lighting setups and composition principles that produce cleaner, more useful portraits for AI analysis.</p>
+          <div class="article-meta">FACE PORTAL · 8 MIN READ · PORTRAIT PHOTOGRAPHY</div>
+        </header>
+
+        <div class="article-content">
+          <p>Good portrait photography and good input for AI face analysis share the same requirements: even lighting, adequate resolution, proper focus on the subject's eyes, and a frontal camera angle. This guide covers the technical and compositional choices that most consistently produce strong results — both as portraits and as analysis inputs — whether you are shooting on a smartphone or a dedicated camera.</p>
+
+          <h2 id="focal-length">Focal Length and Perspective</h2>
+          <p>Focal length is one of the most consequential choices for portrait photography and its effect on AI face analysis results is underappreciated.</p>
+          <p>Wide-angle lenses (below about 35mm equivalent) distort facial proportions in ways that are predictable but problematic for analysis. The nose, being closest to the lens, appears enlarged relative to the ears and the back of the head appears artificially compressed. A face photographed at 24mm looks detectably different from the same face at 85mm even after cropping to the same framing. Face shape analysis is most affected because the proportional relationships between landmarks change with perspective distortion.</p>
+          <p>Lenses in the 50–85mm equivalent range produce the most natural perspective for portrait photography. At these focal lengths, you are far enough from the subject that perspective compression is minimal, and the face is rendered with proportions close to what a neutral observer standing at the same distance would perceive. An 85mm lens at f/1.8 is the classic portrait lens choice for good reason: it flatters the face, separates the subject from the background and requires a working distance that feels comfortable for both photographer and subject.</p>
+          <p>For smartphone users, the main rear camera (usually 26–28mm equivalent) introduces modest distortion at close distances. Stepping back slightly and using 2× optical zoom (where available) produces a more natural perspective for face photography.</p>
+
+          <h2 id="aperture">Aperture and Depth of Field</h2>
+          <p>A wide aperture (f/1.4–f/2.8) blurs the background, which makes the subject stand out cleanly. For AI face analysis, a blurred background is generally helpful — it removes competing visual elements from the image and gives the face detection model a clear, high-contrast subject to work with.</p>
+          <p>However, very wide apertures at close distances can produce shallow depth of field that only partially covers the face. At f/1.2 and a typical head-and-shoulders framing, the depth of field may be as thin as 2–3cm. If the focus is locked on the near eye, the nose, far eye and ears may be noticeably soft. For AI analysis, this softness affects the quality of landmark placement on the out-of-focus features.</p>
+          <p>An aperture between f/2.8 and f/5.6 offers background separation while keeping the entire face acceptably sharp. This is particularly important for analysis of features near the edges of the face — jaw contour, ears, the outer corners of the eyes.</p>
+
+          <h2 id="lighting-setup">Lighting Setups</h2>
+
+          <h3>Natural light</h3>
+          <p>An overcast sky produces the most even, flattering and analysis-friendly light available. The clouds diffuse the sunlight across the entire sky, creating a large, soft light source with no harsh directional shadows. Position the subject facing the sky rather than with the light behind them.</p>
+          <p>Shade on a sunny day similarly produces soft, diffused light with no direct sun. Avoid the transition zone between full shade and full sun, which creates half-lit faces with sharp shadow lines.</p>
+          <p>Window light indoors is the studio equivalent of overcast-day outdoor light. Position the subject at approximately 45 degrees to a window — not directly in front of it (which creates backlight) and not with the window behind the camera (which creates flat, flash-like light). A piece of white card or foam board on the shadow side of the face reflects some of the window light back to reduce the shadow depth.</p>
+
+          <h3>Artificial light</h3>
+          <p>A basic two-light setup (key light + fill light) produces controlled, even illumination for portrait photography. The key light is the primary light source — brighter and positioned at roughly 45 degrees to the face. The fill light is dimmer (typically half the key light intensity) and placed on the opposite side to reduce shadow depth.</p>
+          <p>Ring lights produce even, circular illumination with virtually no shadow — popular for online video because of the characteristic circular catchlight in the eyes. For AI analysis, ring lights work well because they illuminate the face evenly across all regions.</p>
+          <p>Avoid shooting with a single on-camera flash as the primary light source. It produces flat, shadow-less light from the same axis as the camera, which reduces the three-dimensional appearance of the face and can cause red-eye.</p>
+
+          <h2 id="focus">Focus and Sharpness</h2>
+          <p>The eyes must be sharp. This is the fundamental rule of portrait photography and it applies equally for AI analysis because the eye region contains some of the highest-information content for facial landmark placement, expression analysis and eye color detection.</p>
+          <p>Most modern cameras and phones support eye-tracking autofocus. Enable it. In cameras with face detection AF, verify that the camera is focusing on the near eye rather than the background or a shoulder when the subject is at a slight angle.</p>
+          <p>Set the shutter speed to at least 1/125s for a stationary subject and higher if the subject is animated or if you are shooting handheld in dim light. Camera shake at slow shutter speeds produces a different kind of blur than subject movement — both degrade analysis results.</p>
+
+          <h2 id="post-processing">Post-Processing Considerations</h2>
+          <p>Post-processing choices affect what the AI can see in the photograph:</p>
+          <ul>
+            <li><strong>Exposure correction</strong> — bringing up shadows or recovering highlights is fine. Large tonal adjustments that flatten micro-contrast affect age and texture analysis.</li>
+            <li><strong>Skin retouching</strong> — frequency separation or healing brush work that smooths skin texture removes the information that age estimation models depend on. If you want accurate age results, analyze the photo before retouching.</li>
+            <li><strong>AI skin smoothing</strong> — many camera apps apply real-time skin smoothing by default. Check your camera's beauty mode settings and disable them if you want unmodified feature analysis.</li>
+            <li><strong>Export quality</strong> — export at JPEG quality 85 or higher, or use PNG. Very aggressive compression (quality below 60) introduces block artifacts that corrupt texture analysis.</li>
+          </ul>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Portrait Photography</span>
+            <span class="tag">Focal Length</span>
+            <span class="tag">Aperture</span>
+            <span class="tag">Lighting</span>
+            <span class="tag">Focus</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Does camera brand or model matter for AI analysis results?</h4>
+              <p>Less than you might think. A modern smartphone in good light produces images with sufficient resolution and dynamic range for accurate face analysis. The quality of the light matters more than the camera.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Is RAW or JPEG better for face analysis?</h4>
+              <p>Export a JPEG from the RAW at quality 90 or higher. The AI analyzer accepts standard image formats and cannot use RAW directly. A well-developed JPEG from a RAW capture is excellent input.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Should I use portrait mode on my phone?</h4>
+              <p>Portrait mode applies a computational depth-of-field effect that blurs the background. This is generally helpful for face detection. The edge masking around the hair can sometimes produce artifacts, but these rarely affect the face region itself.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#focal-length">Focal Length</a></li>
+            <li><a href="#aperture">Aperture &amp; Depth of Field</a></li>
+            <li><a href="#lighting-setup">Lighting Setups</a></li>
+            <li><a href="#focus">Focus &amp; Sharpness</a></li>
+            <li><a href="#post-processing">Post-Processing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Test your portrait setup with the analyzer.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-to-take-a-good-face-photo/">
+          <h4>How to Take a Good Photo for Face Analysis</h4>
+          <p>Quick-start guide to lighting, angle and focus for any camera.</p>
+        </a>
+        <a class="related-card" href="/blog/how-image-quality-affects-ai-analysis/">
+          <h4>How Image Quality Affects Face Analysis</h4>
+          <p>How compression, blur and resolution degrade AI results.</p>
+        </a>
+        <a class="related-card" href="/blog/ai-hair-analysis/">
+          <h4>How AI Analyzes Hair, Eyes and Visible Features</h4>
+          <p>Why lighting specifically affects hair and eye color results.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

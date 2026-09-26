@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Face Shapes and Facial Proportions | Face Portal</title>
+  <meta name="description" content="What oval, square, round, heart and diamond face shapes actually mean, how to identify yours, and how AI measures facial geometry from a photograph.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/understanding-face-shapes/">
+  <meta property="og:title" content="Understanding Face Shapes and Facial Proportions">
+  <meta property="og:description" content="The seven main face shapes, how they are measured, and how AI determines them from landmark geometry.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Understanding Face Shapes</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">GUIDE</div>
+          <h1>Understanding Face Shapes and Facial Proportions</h1>
+          <p class="article-tagline">What the common face shape categories mean, how to measure them, and why AI results are estimates rather than facts.</p>
+          <div class="article-meta">FACE PORTAL · 8 MIN READ · FACIAL GEOMETRY</div>
+        </header>
+
+        <div class="article-content">
+          <p>Face shape is one of the most commonly requested features from an AI face analyzer, and also one of the most misunderstood results. People often expect a definitive classification — "you have an oval face" — but the reality is that face shape sits on a continuum, that measurements change with camera angle, and that the category labels were designed for styling guides rather than biometric precision. This article explains the standard shapes, how they are measured, and what an AI face analyzer is actually doing when it makes this estimate.</p>
+
+          <h2 id="what-is">What Face Shape Actually Measures</h2>
+          <p>Face shape is a shorthand for the relationship between four linear measurements:</p>
+          <ol>
+            <li><strong>Forehead width</strong> — typically measured at the widest point between the temples or hairline.</li>
+            <li><strong>Cheekbone width</strong> — the widest horizontal measurement across the cheekbone prominence.</li>
+            <li><strong>Jaw width</strong> — measured across the angle of the mandible, roughly at the widest point below the ears.</li>
+            <li><strong>Face length</strong> — measured from the hairline (or top of the forehead) to the tip of the chin.</li>
+          </ol>
+          <p>Different combinations of these measurements — and especially how they relate to each other — define the categories. No single number determines the shape; it is the ratio of the four measurements together that produces a classification.</p>
+
+          <h2 id="shapes">The Seven Main Shapes</h2>
+
+          <h3>Oval</h3>
+          <p>The face length is noticeably greater than the cheekbone width. The forehead is slightly wider than the jaw, and the jaw tapers to a curved rather than angular point. This is often described in styling literature as the "balanced" shape because no single measurement strongly dominates the others. In reality, many faces that are classified as oval would just as reasonably be called oblong or slightly heart-shaped depending on where the measurements are taken.</p>
+
+          <h3>Round</h3>
+          <p>The cheekbone width and face length are approximately equal. The forehead and jaw are also close in width, and the jaw is rounded rather than angular. Round faces often appear "softer" because there are few sharp transitions between the forehead, cheek and jaw regions.</p>
+
+          <h3>Square</h3>
+          <p>The forehead, cheekbone and jaw widths are all approximately equal. The jaw angle is relatively pronounced — closer to 90 degrees than on round or oval shapes — giving a structured, angular appearance. This is the shape most associated with a strong, defined jawline.</p>
+
+          <h3>Heart</h3>
+          <p>The forehead is noticeably wider than the cheekbones, which are wider than the jaw, and the chin tapers to a point. The widest part of the face is the forehead. A pronounced widow's peak hairline often accompanies this shape.</p>
+
+          <h3>Diamond</h3>
+          <p>The cheekbones are the widest point, with both the forehead and jaw noticeably narrower. The forehead is narrower than in a heart shape and the chin tends to be more pointed. This is one of the rarer classifications and is sometimes confused with oval.</p>
+
+          <h3>Oblong / Rectangle</h3>
+          <p>Face length is considerably greater than width, similar to oval but with less tapering — the sides of the face run more parallel from forehead to jaw before meeting at the chin. The forehead, cheekbone and jaw widths are close to each other.</p>
+
+          <h3>Triangle / Pear</h3>
+          <p>The jaw is the widest point, with the cheekbones and forehead progressively narrower above it. This is the inverse of a heart shape. It is less commonly cited in styling guides but does appear in AI face analysis outputs.</p>
+
+          <h2 id="how-ai">How AI Determines Face Shape</h2>
+          <p>An AI face analyzer that uses a landmark model estimates face shape by computing ratios from the 3D coordinates projected onto the 2D image. The jawline points give an approximation of jaw width and chin shape. Eye corner positions and cheekbone landmarks estimate horizontal width at different heights. The distance from forehead to chin gives the length measurement.</p>
+          <p>A classification model then maps these ratios to one of the shape categories. Alternatively, in a vision-language model approach, the model describes the visible geometry directly in text based on its training.</p>
+
+          <h2 id="limitations">Why Face Shape Results Are Always Approximate</h2>
+          <p>Several structural problems make precise face shape classification from a photograph difficult:</p>
+          <ul>
+            <li><strong>Projection from 3D to 2D</strong> — a photograph flattens a three-dimensional object. The true cheekbone width, for example, is a three-dimensional measurement that depends on how far the cheekbones project forward as well as how wide they are. A camera captures only the two-dimensional projection.</li>
+            <li><strong>Camera angle distortion</strong> — even small vertical or horizontal tilts compress or expand apparent proportions. A person photographed slightly from below appears to have a longer jaw than they do in a strictly frontal shot.</li>
+            <li><strong>Hairline ambiguity</strong> — the forehead measurement should run from a defined hairline, but hairlines vary in height and are often partially covered. The model must estimate where the forehead ends.</li>
+            <li><strong>Continuous variation</strong> — faces exist on a continuous distribution of shapes, not in seven discrete bins. A face that falls in the middle ground between oval and oblong will be classified as one or the other depending on small differences in how the landmarks land, which may differ run-to-run.</li>
+          </ul>
+
+          <blockquote>Treat the face shape result as a stylistic approximation, not a biometric measurement. The category that matters is the one that matches your own mirror observation.</blockquote>
+
+          <h2 id="using-the-result">Using the Analysis Result Sensibly</h2>
+          <p>Face shape classification in AI tools is most useful as a starting point for exploring styling, photography composition or portrait analysis — not as a definitive anatomical category. If the analyzer classifies your face as oval and you have always thought of it as heart-shaped, both assessments may be defensible from different measurement conventions. Use the result as one data point, not a verdict. The <a href="/analyzer/">analyzer</a> also reports visible characteristics like jawline softness, chin shape and cheekbone prominence, which are often more descriptively useful than the shape label alone.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Face Shape</span>
+            <span class="tag">Facial Proportions</span>
+            <span class="tag">Landmark Detection</span>
+            <span class="tag">Geometry</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Can I have more than one face shape?</h4>
+              <p>Not simultaneously, but a face that sits between two categories will be classified differently by different systems or even by the same system on different photos of the same person. This is not an error — it reflects genuine ambiguity at the boundaries between categories.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Does face shape change with age?</h4>
+              <p>Yes. Facial fat redistributes, bone remodels very slowly and skin loses elasticity over time, which can gradually shift apparent proportions. The shape category of a person photographed at 20 and again at 60 may be different even if their underlying bone structure has not changed dramatically.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Why did the AI give me a different shape on two photos taken the same day?</h4>
+              <p>Small differences in camera angle, lighting, expression or hair position can all shift the landmark positions enough to push the ratio calculation across a category boundary. This is expected behavior for a system classifying continuous variation into discrete bins.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#what-is">What It Measures</a></li>
+            <li><a href="#shapes">The Seven Shapes</a></li>
+            <li><a href="#how-ai">How AI Determines Shape</a></li>
+            <li><a href="#limitations">Why Results Are Approximate</a></li>
+            <li><a href="#using-the-result">Using the Result</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>See your own face shape estimate from the AI analyzer.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The full pipeline from face detection to feature classification.</p>
+        </a>
+        <a class="related-card" href="/blog/how-ai-estimates-apparent-age/">
+          <h4>How AI Estimates Apparent Age</h4>
+          <p>The visual cues age models use and why ranges are reported.</p>
+        </a>
+        <a class="related-card" href="/blog/ai-face-analysis-guide/">
+          <h4>The Complete Guide to AI Face Analysis</h4>
+          <p>All features, tips and use cases in one comprehensive guide.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

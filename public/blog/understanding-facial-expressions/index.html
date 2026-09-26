@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Facial Expressions in Photos | Face Portal</title>
+  <meta name="description" content="How facial action units work, what AI can reliably detect in a still photograph, the difference between posed and spontaneous expressions, and where AI falls short.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/understanding-facial-expressions/">
+  <meta property="og:title" content="Understanding Facial Expressions in Photos">
+  <meta property="og:description" content="Facial action units, what AI detects in still photos and where expression analysis has hard limits.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Understanding Facial Expressions</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">GUIDE</div>
+          <h1>Understanding Facial Expressions in Photos</h1>
+          <p class="article-tagline">What facial action units are, what AI can reliably detect in a still image, and why expression results describe appearance rather than emotion.</p>
+          <div class="article-meta">FACE PORTAL · 7 MIN READ · EXPRESSION ANALYSIS</div>
+        </header>
+
+        <div class="article-content">
+          <p>A facial expression result from an AI analyzer might say "joyful" or "slightly smiling." It seems simple. But the gap between what an AI sees in a photograph and what a human means by a facial expression is wider than the result suggests. This guide explains how expression analysis works, what it can reliably detect, and what it fundamentally cannot.</p>
+
+          <h2 id="facs">Facial Action Coding System</h2>
+          <p>The scientific framework underlying most expression analysis is the Facial Action Coding System (FACS), developed by psychologist Paul Ekman and Wallace Friesen in the 1970s. FACS decomposes facial expressions into individual muscle movements called Action Units (AUs). Each AU has a number, a name, and a precise anatomical definition.</p>
+          <p>Some representative examples:</p>
+          <ul>
+            <li><strong>AU1</strong> — Inner brow raise (frontalis, pars medialis): the inner portion of the eyebrow lifts.</li>
+            <li><strong>AU4</strong> — Brow lowerer (corrugator supercilii): the brow moves downward and inward.</li>
+            <li><strong>AU6</strong> — Cheek raiser (orbicularis oculi, orbital): the cheek lifts, narrowing the eye opening — the "Duchenne" marker.</li>
+            <li><strong>AU12</strong> — Lip corner puller (zygomaticus major): the corners of the mouth pull back and up.</li>
+            <li><strong>AU17</strong> — Chin raiser (mentalis): the chin protrudes slightly, creating the dimpled chin appearance.</li>
+          </ul>
+          <p>A genuine smile (as opposed to a posed one) involves both AU6 and AU12. A pose-smile without genuine felt emotion typically produces AU12 without the AU6 cheek involvement — the eyes do not fully participate. This is the observation behind the "Duchenne smile" concept: a genuine smile involves the cheek raiser muscle, which is difficult to fake voluntarily.</p>
+
+          <h2 id="what-ai-detects">What AI Detects in a Still Photo</h2>
+          <p>AI expression analysis in a still image works by measuring the geometric displacement of landmarks relative to a neutral baseline. The distance between the lip corners indicates the width of the smile. The height of the eyebrows above the eye ridge indicates surprise. The degree to which the brow is depressed above the nose bridge indicates concentration or anger. These are geometric measurements from the landmark coordinates.</p>
+          <p>Appearance-based methods supplement geometry by analyzing the texture around key regions — the wrinkles around the eyes during a genuine smile, the nasolabial fold deepening during a strong expression, forehead wrinkles during a raised brow. Combined with a trained classifier, these measurements map to expression category labels.</p>
+
+          <h2 id="basic-emotions">The Six Basic Emotions</h2>
+          <p>Ekman's influential research proposed that six emotions produce universally recognizable facial expressions across cultures: happiness, sadness, anger, fear, disgust and surprise. AI classifiers are commonly trained on these six categories, sometimes with a seventh neutral category added.</p>
+          <p>This framework is practically useful but scientifically contested. Critics note that the universality claim has methodological weaknesses, that complex blended emotions (contempt, embarrassment, pride) are not well captured, and that context matters enormously for how observers interpret an expression — an open mouth with raised brows reads as surprise in most photographs but might be a captured moment of speech or laughter that has no emotional content.</p>
+
+          <h2 id="posed-vs-spontaneous">Posed vs Spontaneous Expressions</h2>
+          <p>The distinction between a posed expression and a spontaneous one matters for how you interpret AI results. When someone is asked to smile for a photo, they typically produce a voluntary expression that may or may not involve the AU6 cheek component. AI classifiers trained on laboratory datasets often have different distributions of posed versus spontaneous examples, which affects their behavior on real-world "say cheese" portrait photos.</p>
+          <p>A neutral-looking person with a relaxed resting face might receive an expression label of "neutral" or "calm." A person who happens to have downturned mouth corners (a resting face that reads as sad to others) might receive a "sad" label despite feeling entirely contented. The AI is describing what is visible, not what is felt.</p>
+
+          <h2 id="limits">Where Expression Analysis Has Hard Limits</h2>
+          <ul>
+            <li><strong>Micro-expressions</strong> — fleeting expressions that last less than a fifth of a second are invisible in still photographs. They occur between frames if captured on video, and are not detectable at all in a single captured image.</li>
+            <li><strong>Cultural context</strong> — display rules for emotional expression vary by culture. A trained person from a culture that suppresses visible emotion may show a neutral face in a situation that would produce a strong expression in another cultural context.</li>
+            <li><strong>Contextual ambiguity</strong> — a photograph stripped of context is ambiguous. The same muscle positions that produce a smiling expression in a happy person also appear in a person laughing at something uncomfortable. The AI cannot distinguish.</li>
+            <li><strong>Simultaneous expressions</strong> — blended emotional states produce compound expressions that do not cleanly fit one category. The classifier returns its nearest match.</li>
+          </ul>
+
+          <blockquote>The analyzer describes the visible appearance of facial muscles in a still image. It does not and cannot establish what a person was feeling at the moment the photo was taken.</blockquote>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Facial Expressions</span>
+            <span class="tag">FACS</span>
+            <span class="tag">Action Units</span>
+            <span class="tag">Emotion AI</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Can AI detect if a smile is genuine?</h4>
+              <p>Some models specifically classify smiles as genuine (involving AU6, the cheek raiser) versus non-genuine. This is more reliable in high-quality, well-lit photographs where the eye region is clearly visible.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Why does the analyzer sometimes say my expression is sad when I feel neutral?</h4>
+              <p>Resting facial geometry varies between individuals. People with naturally downturned mouth corners, a slightly furrowed brow or heavy upper eyelids may receive expression labels that do not match their actual state. The AI describes visible muscle positions, not internal emotional state.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Is it possible for AI to detect deception from a photo?</h4>
+              <p>No reliably. Research on detecting deception from facial expressions is inconsistent, and no AI system has demonstrated reliable deception detection in real-world conditions. Claims to the contrary are not supported by the evidence.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#facs">Facial Action Coding System</a></li>
+            <li><a href="#what-ai-detects">What AI Detects</a></li>
+            <li><a href="#basic-emotions">The Six Basic Emotions</a></li>
+            <li><a href="#posed-vs-spontaneous">Posed vs Spontaneous</a></li>
+            <li><a href="#limits">Hard Limits</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Upload a photo and see the expression analysis in action.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The complete pipeline that produces expression analysis results.</p>
+        </a>
+        <a class="related-card" href="/blog/face-analysis-privacy/">
+          <h4>AI Face Analysis, Privacy and Responsible Use</h4>
+          <p>Important considerations before using expression analysis on others.</p>
+        </a>
+        <a class="related-card" href="/blog/ai-face-analysis-guide/">
+          <h4>The Complete Guide to AI Face Analysis</h4>
+          <p>All features and best practices in one comprehensive reference.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

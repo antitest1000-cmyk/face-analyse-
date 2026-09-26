@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How AI Analyzes Hair, Eyes and Visible Features | Face Portal</title>
+  <meta name="description" content="How AI determines hair color, texture and length from a photograph. Eye color detection, feature analysis, and the role lighting plays in all of it.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/ai-hair-analysis/">
+  <meta property="og:title" content="How AI Analyzes Hair, Eyes and Visible Features">
+  <meta property="og:description" content="Hair color and texture detection, eye color analysis and the challenges that lighting and occlusion create for feature AI.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › AI Hair Analysis</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">GUIDE</div>
+          <h1>How AI Analyzes Hair, Eyes and Visible Features</h1>
+          <p class="article-tagline">Color detection, texture classification and why lighting is the largest source of error in visible feature analysis.</p>
+          <div class="article-meta">FACE PORTAL · 7 MIN READ · HAIR &amp; FEATURES</div>
+        </header>
+
+        <div class="article-content">
+          <p>Beyond the face itself, an AI face analyzer examines surrounding visible elements — hair, eye color, accessories and skin presentation — to build a complete portrait description. Each of these has its own detection approach, its own accuracy characteristics and its own specific vulnerability to lighting and image quality. This guide covers how each element is analyzed and what affects the results.</p>
+
+          <h2 id="hair-color">Hair Color Detection</h2>
+          <p>Determining hair color from a photograph requires first segmenting the hair region from the background, the face and any accessories. Modern hair segmentation models use semantic segmentation — a neural network that outputs a per-pixel classification map identifying which pixels belong to the hair region, which to the face, which to the background, and so on.</p>
+          <p>Once the hair region is isolated, the model examines the color distribution within it. This is typically done in the HSV (Hue, Saturation, Value) color space rather than RGB, because HSV separates the actual color (hue) from its lightness (value) and purity (saturation) in a way that is more intuitive for color description. The dominant hue range in the segmented hair region maps to a color category: black, dark brown, medium brown, light brown, blonde, red/auburn, grey, white.</p>
+
+          <h3>Where hair color detection goes wrong</h3>
+          <ul>
+            <li><strong>Highlights and lowlights</strong> — professionally colored hair with multiple tones produces a mixed color distribution. The model may describe the dominant tone or attempt to mention both, depending on how it has been prompted or trained.</li>
+            <li><strong>Colored or fashion hair</strong> — vivid dyes (blue, pink, green) fall outside the typical training distribution and may be described inaccurately or flagged as unusual.</li>
+            <li><strong>Lighting color temperature</strong> — warm indoor lighting (yellow or orange tint) shifts the apparent hair color toward warmer tones. A person with medium brown hair under sodium street lighting may appear to have auburn hair in the photograph.</li>
+            <li><strong>Strong directional light</strong> — creates bright highlights and deep shadows in the hair that can fragment the color reading, making dark brown hair appear partly black and partly mid-brown.</li>
+          </ul>
+
+          <h2 id="hair-texture">Hair Texture and Style</h2>
+          <p>Hair texture — the degree of curl, wave or straightness — is analyzed through the visual pattern of the hair region. Straight hair produces long, parallel texture gradients. Wavy hair produces regular sinusoidal patterns. Curly hair produces tight spiral or helical patterns. Coily hair produces very tight, dense clusters.</p>
+          <p>Texture classification models learn to distinguish these patterns from large training datasets. The main challenge is that the visible pattern depends heavily on how the hair has been styled. Naturally curly hair that has been straightened presents a straight-texture pattern; naturally straight hair that has been permed or set in curls presents a wavy or curly pattern. The model describes what is visible in the image, not the underlying hair structure.</p>
+          <p>Hair length is estimated by comparing the spatial extent of the hair region to face landmarks. Hair that extends to the chin level is classified as shoulder-length; hair that reaches the shoulders as long; shorter hair as medium or short. This is a rough estimate because the framing of the photo determines how much hair is in frame — a close portrait crop of a person with long hair may only show the hair reaching the shoulders within the image even if it extends further down.</p>
+
+          <h2 id="eye-color">Eye Color Analysis</h2>
+          <p>Eye color analysis requires resolving the iris — a relatively small region of the image, approximately 5–10% of the face width in a typical head-and-shoulders portrait. At this scale, color detection is sensitive to image resolution, focus and lighting.</p>
+          <p>The iris is segmented using the eye landmark positions: the model identifies the eye opening, locates the approximate iris boundary and extracts the color distribution from that circular region, excluding the pupil (which is always dark regardless of eye color) and the sclera (the white of the eye).</p>
+          <p>The resulting color tends to be classified as one of: brown, dark brown, hazel, green, blue-grey, blue or grey. These categories map to the biological melanin concentration in the iris, but the visual appearance is heavily modulated by lighting. Blue eyes under tungsten lighting appear greener. Hazel eyes shift toward more golden or green depending on surrounding colors. The model is describing the apparent color in the photograph, which may differ from what the subject would describe their eye color as in natural daylight.</p>
+          <p>When the iris is not clearly visible — the eye is squinting, partially closed, or the resolution is too low to resolve color — the analyzer will report "unclear" rather than guess.</p>
+
+          <h2 id="accessories">Accessories and Visible Features</h2>
+          <p>Glasses, earrings, hats, scarves and other accessories are detected as objects within or around the face region. Modern vision-language models identify these through object recognition trained on large image datasets — the same underlying capability that powers image captioning systems.</p>
+          <p>Glasses detection is typically reliable for clear-lens or lightly tinted frames. Sunglasses with very dark lenses that fully obscure the eyes are detected as glasses but prevent any analysis of the eye region beneath them. Frame style description (rimless, thin-framed, round, rectangular) becomes unreliable at low image resolution or when the frames are partially obscured by hair.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Hair Analysis</span>
+            <span class="tag">Eye Color</span>
+            <span class="tag">Feature Detection</span>
+            <span class="tag">Segmentation</span>
+            <span class="tag">Lighting</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>The AI described my hair color incorrectly. Why?</h4>
+              <p>Lighting color temperature and intensity are the most common causes. Take the photo in natural, neutral daylight and the result will typically be more accurate. Colored environmental light can shift the apparent color of dark or light hair significantly.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Can it detect if hair has been dyed?</h4>
+              <p>Not reliably. The model sees the current visible color, not the underlying natural hair color. It may note unusual color characteristics (e.g., "vivid blue, appears artificially colored") for strongly dyed hair, but it cannot determine the natural base color from a photograph.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Why does the AI say my eye color is unclear?</h4>
+              <p>This is usually because the iris is not sufficiently large in the image, the eye is slightly closed or squinting, or the lighting has washed out the color contrast in the iris region. A close-up portrait in good light improves eye color detection significantly.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#hair-color">Hair Color Detection</a></li>
+            <li><a href="#hair-texture">Hair Texture &amp; Style</a></li>
+            <li><a href="#eye-color">Eye Color Analysis</a></li>
+            <li><a href="#accessories">Accessories</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Upload a photo and see hair and feature analysis results.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-image-quality-affects-ai-analysis/">
+          <h4>How Image Quality Affects Face Analysis</h4>
+          <p>Resolution and lighting — the two factors that most affect hair and eye analysis.</p>
+        </a>
+        <a class="related-card" href="/blog/how-to-take-a-good-face-photo/">
+          <h4>How to Take a Good Photo for Face Analysis</h4>
+          <p>Lighting and framing tips that improve feature detection accuracy.</p>
+        </a>
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The full detection and classification pipeline explained.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

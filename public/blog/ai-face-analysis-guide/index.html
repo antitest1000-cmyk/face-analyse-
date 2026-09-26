@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Complete Guide to Online AI Face Analysis | Face Portal</title>
+  <meta name="description" content="Everything you need to know about AI face analysis in one guide — how it works, all the features, how to get better results, use cases and limitations.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/ai-face-analysis-guide/">
+  <meta property="og:title" content="The Complete Guide to Online AI Face Analysis">
+  <meta property="og:description" content="All features, use cases, photo tips, accuracy expectations and limitations — the comprehensive reference for AI face analysis.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Complete Guide to AI Face Analysis</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">COMPLETE GUIDE</div>
+          <h1>The Complete Guide to Online AI Face Analysis</h1>
+          <p class="article-tagline">How every feature works, how to get better results, what the numbers mean, and where the technology has real limits.</p>
+          <div class="article-meta">FACE PORTAL · 10 MIN READ · ALL FEATURES</div>
+        </header>
+
+        <div class="article-content">
+          <p>AI face analysis has moved from research laboratories to browser-accessible tools that anyone can use without installing software or creating an account. This guide covers the complete picture: what the technology can do, how to use it effectively, how to interpret the results correctly, and where its current limitations sit.</p>
+
+          <h2 id="what-it-is">What AI Face Analysis Is</h2>
+          <p>AI face analysis is the automated extraction of descriptive information from a facial photograph using computer vision and machine learning. Unlike face recognition — which answers "who is this person?" by matching against a known database — face analysis answers "what can I see in this photo?" by describing visible characteristics: apparent age, expression, face shape, hair, eye color, image quality and more.</p>
+          <p>The distinction matters for both privacy and accuracy expectations. This tool does not know who you are and cannot identify you. It reports on what is visible in the pixels of your photograph.</p>
+
+          <h2 id="getting-started">Getting Started</h2>
+          <p>Using the <a href="/analyzer/">Face Portal analyzer</a> requires three steps:</p>
+          <ol>
+            <li><strong>Upload a photo</strong> — drag and drop or click to select a JPG, PNG, WEBP or GIF file. Maximum size is 8 MB.</li>
+            <li><strong>Click Analyze Image</strong> — the photo is securely sent to the vision model. Analysis typically completes in 5–15 seconds depending on image size and server load.</li>
+            <li><strong>Read the results</strong> — results appear in organized categories in the right panel. Each field is labeled.</li>
+          </ol>
+          <p>No account is required. No personal information is collected. The image is processed and the results are returned; the server does not retain the image after analysis completes.</p>
+
+          <h2 id="features">Features Explained</h2>
+
+          <h3>Face Detection</h3>
+          <p>The most basic output: whether a face was detected and how many faces are present. If the tool cannot detect a face — because the image is not a photograph of a person, because the face is heavily occluded, or because quality is too low — subsequent analysis fields will be marked as unclear or not applicable. The notes field will explain why.</p>
+
+          <h3>Apparent Age Range</h3>
+          <p>A broad estimate expressed as a decade range (18–24, 25–34, 35–44, etc.). Based on visible skin texture, facial volume distribution and supporting features like hair color. This is apparent age — how old the face looks based on visible characteristics — not chronological age. Lighting, makeup, image quality and individual variation all affect this estimate. See the dedicated <a href="/blog/how-ai-estimates-apparent-age/">age estimation guide</a> for a detailed explanation.</p>
+
+          <h3>Expression Analysis</h3>
+          <p>Describes the visible expression based on facial muscle positions: smile, neutral, raised brows, furrowed brow and similar. The result describes what is visible in the photograph, not the person's actual emotional state. See <a href="/blog/understanding-facial-expressions/">Understanding Facial Expressions</a> for context on this important distinction.</p>
+
+          <h3>Face Shape</h3>
+          <p>Classifies visible facial proportions into one of the standard categories: oval, round, square, heart, diamond, oblong or triangle. This is an estimate subject to the significant limitations of projecting 3D geometry onto a 2D photograph. See <a href="/blog/understanding-face-shapes/">Understanding Face Shapes</a> for a full explanation of what this measurement actually captures.</p>
+
+          <h3>Skin Appearance</h3>
+          <p>Describes visible skin tone, texture and any notable features visible in the photograph. These are visual descriptions under the current lighting conditions, not permanent skin characteristics.</p>
+
+          <h3>Eye Analysis</h3>
+          <p>Apparent eye color (when the iris is clearly visible), eye shape, eyelid characteristics and gaze direction. Eye color accuracy is highly dependent on lighting conditions. See the <a href="/blog/ai-hair-analysis/">hair and features guide</a> for how this works technically.</p>
+
+          <h3>Hair Analysis</h3>
+          <p>Visible hair color, length, texture (straight, wavy, curly, coily), style and parting. The accuracy of color descriptions is affected by lighting color temperature. Style descriptions become less reliable for complex or elaborate hairstyles.</p>
+
+          <h3>Accessories and Makeup</h3>
+          <p>Identifies visible glasses, earrings, hats and other accessories. Describes visible makeup presence and intensity where detectable.</p>
+
+          <h3>Image Quality</h3>
+          <p>An assessment of the technical quality of the photograph — sharpness, exposure, noise level and face clarity. This is useful as a diagnostic: if quality is reported as poor, the other analysis results will be correspondingly less reliable.</p>
+
+          <h3>Vibe and Style Profile</h3>
+          <p>A subjective, explicitly labelled description of the overall visual impression of the portrait. These are stylistic observations, not factual claims. Take them in the spirit of a casual, AI-generated impression rather than an objective assessment.</p>
+
+          <h2 id="getting-better-results">Getting Better Results</h2>
+          <p>The largest quality improvement comes from the photograph itself, not from the AI. Practical steps:</p>
+          <ul>
+            <li>Photograph in <strong>soft, even light</strong> — overcast daylight outdoors or indirect window light indoors.</li>
+            <li>Position the camera at <strong>eye level</strong>, with the face looking approximately toward the lens.</li>
+            <li>Frame the photo as a <strong>head-and-shoulders portrait</strong> — not a full-body shot where the face is a small portion of the image.</li>
+            <li>Ensure the face is <strong>in focus</strong> — tap to focus on the face before taking the photo on a smartphone.</li>
+            <li>Upload the <strong>original file</strong>, not a screenshot or a second-generation JPEG from a messaging app.</li>
+          </ul>
+          <p>See <a href="/blog/how-to-take-a-good-face-photo/">How to Take a Good Photo for Face Analysis</a> and <a href="/blog/portrait-photography-tips/">Portrait Photography Tips</a> for more detailed guidance.</p>
+
+          <h2 id="interpreting">Interpreting Results Correctly</h2>
+          <p>Every result from an AI face analyzer is an estimate, not a measurement. The key mental model: the AI is reporting what is statistically most likely given the pixels it received, not what is objectively true about the person. Results that seem surprising often reflect legitimate photographic factors — lighting, angle, image quality — rather than errors in the model.</p>
+          <p>The confidence levels and notes fields in the analysis report are there to communicate uncertainty honestly. A result marked with low confidence is the AI's way of saying "I can see something here but I am not certain about this." High confidence indicates clearer visual evidence for the stated result.</p>
+
+          <h2 id="use-cases">Common Use Cases</h2>
+          <ul>
+            <li><strong>Personal curiosity</strong> — understanding how AI describes your own visible characteristics.</li>
+            <li><strong>Portrait photography evaluation</strong> — using the quality assessment to evaluate lighting and framing decisions before a shoot or after reviewing test shots.</li>
+            <li><strong>Learning about AI</strong> — exploring how computer vision works and what its current capabilities and limitations are.</li>
+            <li><strong>Content creation</strong> — understanding how AI describes portrait photographs for creative or writing projects.</li>
+          </ul>
+
+          <h2 id="limitations">Honest Assessment of Limitations</h2>
+          <p>AI face analysis is genuinely impressive but it has real limitations that every user should understand:</p>
+          <ul>
+            <li><strong>Profile views</strong> are handled poorly by most models — analysis quality degrades significantly beyond about 40 degrees from frontal.</li>
+            <li><strong>Non-standard lighting</strong> produces unreliable color descriptions and can distort apparent age.</li>
+            <li><strong>Heavy occlusion</strong> (sunglasses, surgical masks, hands) prevents analysis of covered regions and reduces overall result quality.</li>
+            <li><strong>Demographic bias</strong> — models trained on non-diverse datasets perform less consistently on underrepresented groups, particularly for age estimation.</li>
+            <li><strong>Low image quality</strong> — blur, noise and aggressive JPEG compression each degrade specific parts of the analysis pipeline.</li>
+          </ul>
+          <p>The tool reports confidence levels and notes specifically to communicate where these limitations are affecting the current result.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Face Analysis</span>
+            <span class="tag">AI</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Portrait Photography</span>
+            <span class="tag">Privacy</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Is this tool free to use?</h4>
+              <p>Yes. There are no accounts, subscriptions or per-analysis fees for using this demo tool.</p>
+            </div>
+            <div class="faq-item">
+              <h4>How long does analysis take?</h4>
+              <p>Typically 5–15 seconds, depending on the image size and current API response time. Larger images take slightly longer to transmit; the vision model processing time is the main variable.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Can I analyze multiple photos in sequence?</h4>
+              <p>Yes — after each analysis, click "Remove image" and upload a new photo. Each analysis is independent.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Why do results differ between photos of the same person?</h4>
+              <p>Because the visible characteristics change: lighting, angle, expression and image quality all affect what the model sees. This is expected and correct behavior for a system analyzing visible characteristics rather than performing identity-stable face recognition.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Does it work on drawings, cartoons or non-photograph images?</h4>
+              <p>The tool is designed for photographs of real people. It may attempt to analyze faces in illustrations, but results will be less reliable and the age, texture and color estimates will be based on the rendering style rather than real facial characteristics.</p>
+            </div>
+            <div class="faq-item">
+              <h4>What should I do if the results look completely wrong?</h4>
+              <p>Check the image quality assessment first. If quality is rated poor, try retaking the photo with better lighting and focus. If quality is good but results are still surprising, note the confidence levels — a result with low confidence is explicitly flagged as uncertain. The notes field often explains specific factors that affected the result.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#what-it-is">What AI Face Analysis Is</a></li>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#features">Features Explained</a></li>
+            <li><a href="#getting-better-results">Getting Better Results</a></li>
+            <li><a href="#interpreting">Interpreting Results</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#limitations">Limitations</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Put this guide into practice with the live analyzer.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">ALL ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The technical pipeline from detection to classification.</p>
+        </a>
+        <a class="related-card" href="/blog/how-to-take-a-good-face-photo/">
+          <h4>How to Take a Good Photo for Face Analysis</h4>
+          <p>Practical photo advice for better results.</p>
+        </a>
+        <a class="related-card" href="/blog/face-analysis-privacy/">
+          <h4>Privacy and Responsible Use</h4>
+          <p>Data handling, biometric law and ethical considerations.</p>
+        </a>
+        <a class="related-card" href="/blog/how-ai-estimates-apparent-age/">
+          <h4>How AI Estimates Apparent Age</h4>
+          <p>The visual cues age models use and their limitations.</p>
+        </a>
+        <a class="related-card" href="/blog/understanding-face-shapes/">
+          <h4>Understanding Face Shapes</h4>
+          <p>What oval, square and heart-shaped actually mean.</p>
+        </a>
+        <a class="related-card" href="/blog/understanding-facial-expressions/">
+          <h4>Understanding Facial Expressions</h4>
+          <p>FACS, action units and what AI can detect in a still photo.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

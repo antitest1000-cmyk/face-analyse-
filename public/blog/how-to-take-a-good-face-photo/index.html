@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Take a Good Photo for AI Face Analysis | Face Portal</title>
+  <meta name="description" content="Lighting, angle, framing and focus advice that produces sharper, more accurate AI face analysis results from any camera or smartphone.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/how-to-take-a-good-face-photo/">
+  <meta property="og:title" content="How to Take a Good Photo for AI Face Analysis">
+  <meta property="og:description" content="Practical lighting, angle, focus and framing tips that produce cleaner, more accurate AI analysis results.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › How to Take a Good Photo for Face Analysis</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">PHOTOGRAPHY</div>
+          <h1>How to Take a Good Photo for AI Face Analysis</h1>
+          <p class="article-tagline">Lighting, angle, focus and framing decisions that produce cleaner, more accurate results from any AI face analyzer.</p>
+          <div class="article-meta">FACE PORTAL · 7 MIN READ · PHOTOGRAPHY</div>
+        </header>
+
+        <div class="article-content">
+          <p>The most common reason an AI face analyzer returns uncertain or inaccurate results is not a limitation of the AI — it is a limitation of the input image. Dim lighting, an extreme camera angle, a blurry subject or heavy JPEG compression can each degrade the analysis significantly. This guide covers the practical steps that produce consistently cleaner results, whether you are using a smartphone, a mirrorless camera or a point-and-shoot.</p>
+
+          <h2 id="lighting">Lighting: the Single Biggest Factor</h2>
+          <p>Even illumination gives the model the most accurate representation of skin texture, facial contour and color. Problems arise when light comes from only one direction or from behind the subject.</p>
+
+          <h3>Good lighting situations</h3>
+          <ul>
+            <li><strong>Overcast daylight outdoors</strong> — cloud cover acts as a giant diffuser and produces soft, even light with no harsh shadows. This is ideal for AI analysis because the face is evenly exposed from edge to edge.</li>
+            <li><strong>Indirect window light</strong> — sitting near a window that does not receive direct sunlight gives soft, directional light that still renders facial structure clearly. Placing a white card or sheet on the opposite side of the face reduces the shadow on the darker cheek.</li>
+            <li><strong>Ring light or soft box (artificial)</strong> — positioned at camera level and aimed at the face, these produce even illumination across the entire facial surface. A ring light specifically creates even shadow fill, though it gives eyes a distinctive circular catchlight that is visible in the results.</li>
+          </ul>
+
+          <h3>Lighting to avoid</h3>
+          <ul>
+            <li><strong>Overhead or ceiling light</strong> — places deep shadows in the eye sockets and under the nose, which both confuse landmark detection and make the apparent age estimate skew older.</li>
+            <li><strong>Backlighting</strong> — any light source behind the subject silhouettes the face and forces the camera to underexpose it. The result looks dark, loses skin texture and produces poor analysis.</li>
+            <li><strong>Colored ambient light</strong> — candles, neon signs and colored LED strips shift the apparent skin tone dramatically, which affects the AI's description of complexion and can produce inaccurate color descriptions for eyes and hair.</li>
+          </ul>
+
+          <h2 id="angle">Camera Angle</h2>
+          <p>AI face analysis models are trained predominantly on frontal or near-frontal photographs. This is because face detection and landmark placement become less reliable as the angle increases.</p>
+          <p>For the most complete and accurate analysis, position the camera at approximately eye level with the subject looking directly toward the lens. This orientation gives the model a symmetric view of both eyes, the full width of the nose and lips, and a clean jawline contour — all of which are used by different parts of the analysis pipeline.</p>
+          <p>A moderate three-quarter angle (roughly 15–25 degrees to the side) still produces reliable detection and landmark placement. Beyond about 40 degrees, landmark confidence drops, expression analysis becomes unreliable and the face shape estimation loses accuracy because only one side of the facial geometry is visible.</p>
+          <p>Vertical angle follows the same principle. Looking up at a camera placed above eye level shortens the face and flattens the nose. Looking down into a camera exaggerates forehead size. Neither distortion ruins the result, but it does affect apparent age and face shape descriptions.</p>
+
+          <h2 id="distance">Distance and Framing</h2>
+          <p>The face should occupy a meaningful portion of the image frame — roughly the upper half to two-thirds of the picture, framed approximately at the shoulders. This ensures the face region contains enough pixels for the model to work with.</p>
+          <p>Avoid shooting from very close distances with a wide-angle lens. The distortion introduced at wide focal lengths — the way it makes the nose appear larger relative to the ears — is optical, not real, but it does affect how the AI describes facial proportions. If you are using a smartphone, step back a little further rather than zooming in with the digital zoom, which reduces resolution without reducing distortion.</p>
+
+          <h2 id="sharpness">Sharpness and Focus</h2>
+          <p>The AI needs to resolve fine texture — pore structure, hair strands, eyelash definition — to produce accurate descriptions of skin, hair and eye detail. Any blur degrades this capability.</p>
+          <p>On a smartphone, tap the subject's face before taking the photo to lock focus there. Many phones default to focusing on the nearest object, which might be a shoulder or a piece of clothing in the foreground.</p>
+          <p>In lower light, smartphones compensate by using a slower shutter speed. Even slight subject movement during the exposure — a small head turn, the natural sway of a person standing — registers as motion blur. Where possible, shoot in good light, ask the subject to keep still for a moment, or brace the camera against a surface.</p>
+
+          <h2 id="occlusion">Reducing Occlusion</h2>
+          <p>Occlusion — anything covering part of the face — limits what the AI can report. Some occlusions are unavoidable. Others are easy to address:</p>
+          <ul>
+            <li><strong>Hair across the face</strong> — if you want a complete facial feature analysis, pulling hair back behind the ears gives the model a clear view of the jawline and cheek structure.</li>
+            <li><strong>Sunglasses or tinted lenses</strong> — these entirely block eye color, lid detail and often the expression of the upper face. Remove them if a complete eye analysis is the goal.</li>
+            <li><strong>Hands or objects near the face</strong> — common in casual photos, these can cover portions of the chin, jawline or cheeks. The model will report what it can see and note the occlusion in its confidence assessment.</li>
+          </ul>
+
+          <h2 id="format">File Format and Compression</h2>
+          <p>After taking a good photo, save or export it at reasonable quality. JPEG is the most common format for sharing, but aggressive compression introduces block artifacts that degrade texture analysis. If your camera or phone offers a quality setting, anything above 80% preserves adequate detail for AI analysis. PNG is lossless and works well for images that have already been through one round of JPEG compression.</p>
+          <p>Avoid uploading screenshots of photos — screenshots often compress the image a second time and add screen-scaling artifacts. Upload the original file directly from your camera roll or photo library when possible.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Photography</span>
+            <span class="tag">Lighting</span>
+            <span class="tag">Image Quality</span>
+            <span class="tag">Sharpness</span>
+            <span class="tag">Framing</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Does a selfie work for face analysis?</h4>
+              <p>Yes, selfies work well if taken in good light. The front camera on most modern smartphones has adequate resolution for analysis. Hold the phone at eye level rather than angling it up or down.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Should the background be plain?</h4>
+              <p>A plain background helps face detection by reducing competing visual elements. That said, a busy background does not usually break detection — it just means the model has more non-face content to process before focusing on the face region.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Does it matter if the photo has already been edited?</h4>
+              <p>Light cropping and brightness adjustment are fine. Heavy smoothing filters, AI skin retouching and dramatic color grading all remove or alter the details that the analysis depends on, and will affect age, texture and color results.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#lighting">Lighting</a></li>
+            <li><a href="#angle">Camera Angle</a></li>
+            <li><a href="#distance">Distance &amp; Framing</a></li>
+            <li><a href="#sharpness">Sharpness &amp; Focus</a></li>
+            <li><a href="#occlusion">Reducing Occlusion</a></li>
+            <li><a href="#format">File Format</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Put these tips into practice and analyze your photo.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/portrait-photography-tips/">
+          <h4>Portrait Photography Tips for Better Face Analysis</h4>
+          <p>Camera settings, focal length and lighting setups for sharper portraits.</p>
+        </a>
+        <a class="related-card" href="/blog/how-image-quality-affects-ai-analysis/">
+          <h4>How Image Quality Affects Face Analysis</h4>
+          <p>Resolution, compression and blur — how each degrades AI accuracy.</p>
+        </a>
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The complete computer vision pipeline explained in plain language.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

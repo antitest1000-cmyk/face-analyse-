@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How AI Face Analysis Works: A Complete Guide | Face Portal</title>
+  <meta name="description" content="A practical explanation of how AI face analysis works — from face detection and landmark mapping to expression scoring and hair analysis.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/how-ai-face-analysis-works/">
+  <meta property="og:title" content="How AI Face Analysis Works: A Complete Guide">
+  <meta property="og:description" content="From CNN-based face detection and 68-point landmark models to expression scoring — how every part of the analysis pipeline works.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › How AI Face Analysis Works</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">TECHNOLOGY</div>
+          <h1>How AI Face Analysis Works: A Complete Guide</h1>
+          <p class="article-tagline">A practical explanation of the computer vision pipeline — from raw image to structured report.</p>
+          <div class="article-meta">FACE PORTAL · 9 MIN READ · COMPUTER VISION</div>
+        </header>
+
+        <div class="article-content">
+          <p>When you upload a photo to an AI face analyzer and receive a structured report seconds later, a multi-stage computer vision pipeline has executed invisibly. Each stage has a specific job — locating the face, mapping its geometry, extracting measurable features and translating those measurements into human-readable descriptions. This guide walks through each stage in plain language.</p>
+
+          <h2 id="detection">Stage 1: Face Detection</h2>
+          <p>The first task is simply finding where in the image a face exists. This sounds straightforward, but photographs arrive at every scale, angle and level of quality. A face occupying 90% of the frame presents a very different pattern of pixels than one that is a small element in a crowd photograph.</p>
+          <p>Early face detectors — most famously the Viola-Jones algorithm developed in 2001 — used hand-crafted Haar-like features and a cascade of classifiers to scan an image with a sliding window. This approach was fast enough to run in real time on the hardware of its era and still appears in some camera autofocus systems today. Its weaknesses are sensitivity to unusual lighting and poor performance at non-frontal angles.</p>
+          <p>Modern detectors are built on convolutional neural networks. MTCNN (Multi-task Cascaded Convolutional Networks) runs three progressively finer networks in sequence: a Proposal Network that quickly flags candidate regions, a Refinement Network that filters false positives, and an Output Network that produces the final bounding box and five initial landmarks. RetinaFace, a later architecture, improves on MTCNN at extreme scales and heavy occlusions. Both detect multiple faces simultaneously and return a bounding box plus a confidence score for each.</p>
+          <p>The output of face detection is a rectangle — or several rectangles — within the image. Everything after this depends on that rectangle being accurate.</p>
+
+          <h2 id="landmarks">Stage 2: Facial Landmark Detection</h2>
+          <p>A bounding box tells the system where the face is, but not what it looks like. The next stage places a set of precise reference points across the face — these are called facial landmarks or keypoints.</p>
+          <p>The most widely used landmark scheme places 68 points at anatomically meaningful positions: 17 along the jawline contour, 10 on the eyebrow arches, 9 on the nose bridge and tip, 12 on each eye including the corners and eyelid margins, and 20 on the lips. Alternative schemes use 5 points (eye centers, nose tip and mouth corners) for speed, or denser meshes of several hundred points for high-accuracy applications like augmented reality makeup.</p>
+
+          <blockquote>Landmark detection is the geometric foundation that everything else is built on. Age estimation, expression scoring, face shape classification and alignment all start from these coordinates.</blockquote>
+
+          <p>Landmark models are trained on large datasets of photographs where human annotators have manually placed the landmark points. The model learns to predict those positions from the pixel patterns surrounding each anatomical region. At inference time, it processes the cropped face region and outputs a set of (x, y) coordinates.</p>
+          <p>Quality degrades at extreme poses (profile views beyond roughly 45 degrees), heavy occlusion (sunglasses, hair across the face) and very low image resolution. Most production systems include a quality gate that reduces confidence or flags the result when landmarks cannot be reliably placed.</p>
+
+          <h2 id="alignment">Stage 3: Face Alignment</h2>
+          <p>After landmark detection, the pipeline typically normalizes the face. Using the detected eye center positions, it rotates and scales the image so that both eyes sit at fixed positions in the output frame. This step removes most of the variance introduced by different photographers holding their cameras at different angles, and makes subsequent feature extraction more consistent and accurate.</p>
+
+          <h2 id="feature-extraction">Stage 4: Feature Extraction</h2>
+          <p>With an aligned face, the system passes the image through a deep neural network — usually a variant of ResNet, MobileNet or a purpose-built architecture — to produce a compact numerical representation called an embedding or feature vector. This vector encodes the visual content of the face in a way that is useful for downstream classification tasks.</p>
+          <p>Face recognition systems stop here and compare embeddings between images. Face analysis systems use the embedding (and sometimes direct pixel regions around specific landmarks) as input to a set of specialized classifiers.</p>
+
+          <h2 id="classification">Stage 5: Classification and Estimation</h2>
+          <p>Multiple classifiers run in parallel on the extracted features:</p>
+          <ul>
+            <li><strong>Age estimation</strong> — typically a regression model that predicts a continuous age value, then rounded to a range. Training requires large datasets with verified ages.</li>
+            <li><strong>Expression classification</strong> — maps landmark geometry (distance between lip corners, eyebrow height above the eye) to expression categories. More sophisticated models use both geometry and appearance features.</li>
+            <li><strong>Hair region segmentation</strong> — a separate model segments the hair from the background and face, then classifies color (from average HSV values in the segmented region) and texture (from frequency analysis or CNN texture features).</li>
+            <li><strong>Accessory detection</strong> — an object detection sub-model looks for glasses frames, earrings and other accessories.</li>
+            <li><strong>Skin texture analysis</strong> — examines the frequency content of the skin region to describe smoothness, visible pores or other surface texture.</li>
+          </ul>
+
+          <h2 id="llm-output">Stage 6: Language Generation</h2>
+          <p>In tools that use large vision-language models — like the one powering this analyzer — the entire pipeline is condensed into a single model call. The model processes the image directly and uses its training on both visual data and text to produce structured descriptions without requiring separate landmark or classification stages. This approach is more flexible and handles unusual images more gracefully, but the underlying logic still follows the same conceptual path: locate the face, describe its components, assess quality.</p>
+          <p>The structured JSON output you see in the <a href="/analyzer/">analyzer results panel</a> is produced by prompting the model to organize its analysis into defined fields — face count, age range, expression, hair, image quality — rather than returning free-form text.</p>
+
+          <h2 id="limits">Limits Every User Should Know</h2>
+          <p>Understanding the pipeline helps explain why results are sometimes wrong or uncertain:</p>
+          <ul>
+            <li><strong>Profile angles</strong> prevent reliable landmark placement. Age and expression estimates become much less accurate beyond 30–40 degrees from frontal.</li>
+            <li><strong>Low resolution</strong> — a face region smaller than roughly 80×80 pixels — loses the texture detail that age and expression models depend on.</li>
+            <li><strong>Heavy compression</strong> (JPEG artifacts at low quality settings) introduces block patterns that corrupt texture analysis.</li>
+            <li><strong>Unusual lighting</strong> can flatten skin texture or cast misleading shadows that alter apparent age.</li>
+            <li><strong>Training data bias</strong> — models trained on datasets dominated by particular demographics perform less consistently on underrepresented groups.</li>
+          </ul>
+          <p>These are not failures of the implementation but structural properties of the current state of AI. The analyzer reports confidence levels alongside its estimates specifically to flag when conditions are likely affecting accuracy.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Face Detection</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Landmark Detection</span>
+            <span class="tag">CNN</span>
+            <span class="tag">Age Estimation</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Does the analyzer store a copy of my face embedding?</h4>
+              <p>No. The image is sent to the vision API for analysis and the response is returned to your browser. Neither the image nor any derived embedding is retained by this server.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Can the model identify who I am?</h4>
+              <p>This tool is configured to describe visible features only. It does not perform identity search or compare your image against any database of known individuals.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Why is the age estimate a range and not a specific number?</h4>
+              <p>Age estimation models output a continuous value with meaningful uncertainty. Reporting a range is more honest than rounding to a specific year that implies false precision.</p>
+            </div>
+            <div class="faq-item">
+              <h4>How accurate are expression results?</h4>
+              <p>Posed or strong expressions (a wide smile, raised eyebrows) are detected reliably. Subtle or ambiguous expressions are harder to classify correctly. Micro-expressions that last a fraction of a second are not detectable in still photographs.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#detection">Face Detection</a></li>
+            <li><a href="#landmarks">Landmark Detection</a></li>
+            <li><a href="#alignment">Face Alignment</a></li>
+            <li><a href="#feature-extraction">Feature Extraction</a></li>
+            <li><a href="#classification">Classification</a></li>
+            <li><a href="#llm-output">Language Generation</a></li>
+            <li><a href="#limits">Limits to Know</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Upload a photo and see AI face analysis in action.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-ai-estimates-apparent-age/">
+          <h4>How AI Estimates Apparent Age From a Photograph</h4>
+          <p>The visual cues age estimation models use and why results are ranges.</p>
+        </a>
+        <a class="related-card" href="/blog/understanding-facial-expressions/">
+          <h4>Understanding Facial Expressions in Photos</h4>
+          <p>Facial action units, what AI can detect, and where it falls short.</p>
+        </a>
+        <a class="related-card" href="/blog/how-image-quality-affects-ai-analysis/">
+          <h4>How Image Quality Affects Face Analysis</h4>
+          <p>Resolution, compression and blur — how each degrades the pipeline.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

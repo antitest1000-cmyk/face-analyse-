@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Face Analyzer: Free Online Face Analysis Tool</title>
+  <meta name="description" content="Upload your photo to our AI Face Analyzer. Explore apparent age, facial features, hairstyle, expression and image quality with detailed AI analysis.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .page-header {
+      text-align: center;
+      padding: 24px 0 10px 0;
+    }
+    .page-header h1 {
+      color: var(--orange);
+      font-size: 26px;
+      margin: 0 0 6px 0;
+    }
+    .page-header p {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration: none;">Face<span>Portal</span></a>
+    <div class="status-dot" title="Online"></div>
+  </header>
+
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/">Home</a>
+    <a href="/ai-face-analyzer/">Face Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="page-header">
+      <h1>AI Face Analyzer</h1>
+      <p>Upload a photo to detect faces and analyze visible facial features</p>
+    </div>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-title">Upload Your Photo</div>
+        <div class="panel-body">
+          <p style="margin-top: 0; margin-bottom: 20px; color: var(--muted);">Discover apparent age, facial features, hairstyle, expression, and more. Supports up to 5 faces per image.</p>
+          <label class="dropzone" id="dropzone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            <div class="upload-icon">+</div>
+            <strong>Choose Image</strong>
+            <span>JPG, PNG, WEBP or GIF · max 8 MB</span>
+          </label>
+
+          <div class="preview-wrap hidden" id="previewWrap">
+            <img id="preview" alt="Selected image preview">
+            <button class="remove-btn" id="removeBtn" type="button">Remove image</button>
+          </div>
+
+          <button class="analyze-btn" id="analyzeBtn" type="button" disabled>
+            Analyze Image
+          </button>
+
+          <div class="error hidden" id="errorBox"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Analysis Results</div>
+        <div class="panel-body results" id="results">
+          <div class="empty">
+            <div class="empty-mark">?</div>
+            <strong>Face Analysis Pending</strong>
+            <span>Upload an image to view face detection, apparent age, facial features, hair analysis, expression analysis, and image quality.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · CLASSIC WEB ANALYSIS INTERFACE</footer>
+
+  <script src="/app.js"></script>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

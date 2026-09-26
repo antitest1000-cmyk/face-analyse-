@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Face Analysis, Privacy and Responsible Use | Face Portal</title>
+  <meta name="description" content="What happens to your photo when you use an AI face analyzer, what biometric data laws say about face images, and principles for responsible use of this technology.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/face-analysis-privacy/">
+  <meta property="og:title" content="AI Face Analysis, Privacy and Responsible Use">
+  <meta property="og:description" content="Data transmission, biometric law, GDPR and BIPA — what you need to know before using AI face analysis tools.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › AI Face Analysis Privacy</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">PRIVACY</div>
+          <h1>AI Face Analysis, Privacy and Responsible Use</h1>
+          <p class="article-tagline">What happens to your photo, what the law says about facial data, and how to use these tools without creating problems for yourself or others.</p>
+          <div class="article-meta">FACE PORTAL · 9 MIN READ · PRIVACY &amp; DATA</div>
+        </header>
+
+        <div class="article-content">
+          <p>Face analysis tools occupy a legally and ethically sensitive space. They process images of real people and generate descriptions that can feel intrusive even when the analysis is entirely visual. Understanding what actually happens to your data, what legal frameworks govern it, and what ethical norms apply is important for anyone using or building these tools.</p>
+
+          <h2 id="data-flow">What Happens to Your Photo</h2>
+          <p>When you upload a photo to this analyzer, the following sequence occurs:</p>
+          <ol>
+            <li>Your browser reads the image file and sends it to this server over an encrypted HTTPS connection.</li>
+            <li>The server receives the image bytes in memory and constructs an API request to the configured vision model provider (via OpenRouter).</li>
+            <li>The image is transmitted to the vision model provider's infrastructure for processing.</li>
+            <li>The model analyzes the image and returns a JSON response containing the analysis results.</li>
+            <li>The server forwards those results to your browser and discards the image from memory.</li>
+          </ol>
+          <p>This server does not write your image to disk, does not store it in a database, and does not log identifiable information about your upload. The image exists in server memory only for the duration of the API round-trip.</p>
+          <p>What the vision model provider does with your image depends on their data handling policy. Large model providers typically have policies covering data retention, use for model improvement and access controls. These policies vary between providers and may change over time. Before uploading a sensitive photo, it is reasonable to review the current data handling terms of the specific provider.</p>
+
+          <h2 id="biometric-law">Biometric Data Law</h2>
+          <p>The legal status of facial photographs and derived facial data varies significantly by jurisdiction. Several important frameworks are directly relevant to face analysis technology:</p>
+
+          <h3>GDPR (European Union and UK)</h3>
+          <p>The General Data Protection Regulation classifies "biometric data processed for the purpose of uniquely identifying a natural person" as a special category of personal data requiring explicit consent and additional protections. A raw photograph is personal data under GDPR if the subject is identifiable. Derived data — like a facial embedding used for recognition — is explicitly biometric data.</p>
+          <p>This tool does not perform facial recognition or generate identity embeddings, which places it in a different regulatory position than a face recognition system. However, if you are building a product using this technology for a European audience, the data minimization and purpose limitation principles of GDPR apply.</p>
+
+          <h3>BIPA (Illinois, USA)</h3>
+          <p>The Illinois Biometric Information Privacy Act is one of the most stringent biometric privacy laws in the United States. It requires informed written consent before collecting biometric identifiers (including facial geometry) and prohibits profiting from biometric data. BIPA has resulted in substantial class action litigation against companies that collected facial data without adequate consent disclosure. Several other US states have enacted similar laws.</p>
+
+          <h3>CCPA (California, USA)</h3>
+          <p>The California Consumer Privacy Act gives California residents rights to know what personal data is collected about them, to request deletion and to opt out of the sale of their data. Biometric data is a sensitive personal information category under CCPA with specific handling requirements.</p>
+
+          <h2 id="what-is-not-stored">What This Tool Does Not Do</h2>
+          <p>To be explicit about the scope of this tool:</p>
+          <ul>
+            <li>It does not perform facial recognition — it does not compare your face against any database.</li>
+            <li>It does not generate or store facial embeddings (numerical representations used for identity matching).</li>
+            <li>It does not link your photo to your identity, IP address, or any persistent identifier.</li>
+            <li>It does not make the photo available to other users.</li>
+            <li>It does not use your photo to train any model on this server.</li>
+          </ul>
+
+          <h2 id="responsible-use">Responsible Use Principles</h2>
+          <p>Beyond what the tool does or does not do technically, using face analysis on photographs of real people raises ethical considerations that are worth thinking through:</p>
+
+          <h3>Consent</h3>
+          <p>Analyzing a photograph of someone who did not consent to being analyzed — particularly for information like apparent age, expression or other personal characteristics — is ethically problematic even if the analysis is purely visual and the results are never shared. The reasonable expectation of most people who appear in a photograph is that the photo will be viewed by the people it was shared with, not processed by an AI that generates a report on their physical characteristics.</p>
+          <p>For your own photos: consent is clearly given. For photos of others that you have taken: consider whether the context of the photo makes this use reasonable. For photos of others that you did not take: consider the original intent of the image and whether the person photographed would object.</p>
+
+          <h3>Children's photos</h3>
+          <p>Exercise particular caution with photographs of children. Age estimation and other AI analyses on children's faces raise additional concerns under various children's privacy frameworks (COPPA in the US, the GDPR's provisions on children's data). Do not upload photos of other people's children.</p>
+
+          <h3>Sensitive contexts</h3>
+          <p>Avoid uploading photographs from medical, legal, or intimate contexts. The tool is designed for standard portrait photography. Images that are sensitive in their original context remain sensitive when processed by an AI and transmitted to a third-party API.</p>
+
+          <h3>Acting on results</h3>
+          <p>The results are visual estimates from a machine learning model. Making consequential decisions about real people based on AI analysis of their photographs — employment decisions, security screening, medical diagnosis — is both technically inappropriate (the model was not designed or validated for these purposes) and likely illegal in many jurisdictions where automated processing for consequential decisions requires specific legal bases.</p>
+
+          <blockquote>Use this tool to learn about AI, explore your own portrait, or evaluate photo quality. Do not use it to make decisions about other people.</blockquote>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Privacy</span>
+            <span class="tag">GDPR</span>
+            <span class="tag">BIPA</span>
+            <span class="tag">Biometric Data</span>
+            <span class="tag">Responsible AI</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>Is face analysis output considered biometric data under the law?</h4>
+              <p>It depends on the jurisdiction and what data is generated. A textual description ("appears to have an oval face, brown hair") is generally not biometric data. A facial geometry embedding (a numerical vector used for identity matching) is explicitly biometric under GDPR, BIPA and similar laws. This tool generates textual descriptions, not identity embeddings.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Can I use this tool on photos of public figures?</h4>
+              <p>Public figures have reduced privacy expectations regarding their publicly available images. Analyzing publicly available photos of public figures for educational or journalistic purposes is generally permissible. Using analysis results to make factual claims about a specific person's private characteristics is a different matter and should be approached carefully.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Should I be worried about my photo being used to train AI models?</h4>
+              <p>Whether the vision model provider uses API inputs to improve their models depends on their terms of service. Major providers typically do not train on customer API requests by default, though policies vary. Review the provider's current data handling terms if this is a concern for you.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Is the connection to the server secure?</h4>
+              <p>The connection to this server is encrypted via HTTPS, which protects the image from interception in transit. The connection from this server to the vision model provider's API is also encrypted.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#data-flow">What Happens to Your Photo</a></li>
+            <li><a href="#biometric-law">Biometric Data Law</a></li>
+            <li><a href="#what-is-not-stored">What This Tool Does Not Do</a></li>
+            <li><a href="#responsible-use">Responsible Use</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">USE THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Analyze your own photo with these privacy considerations in mind.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The technical pipeline that processes your photo.</p>
+        </a>
+        <a class="related-card" href="/blog/ai-face-analysis-guide/">
+          <h4>The Complete Guide to AI Face Analysis</h4>
+          <p>All features and best practices in one place.</p>
+        </a>
+        <a class="related-card" href="/blog/understanding-facial-expressions/">
+          <h4>Understanding Facial Expressions in Photos</h4>
+          <p>Why expression results describe appearance, not internal state.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

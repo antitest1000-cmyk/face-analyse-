@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Lighting and Image Quality Affect AI Face Analysis | Face Portal</title>
+  <meta name="description" content="Resolution requirements, JPEG compression, motion blur, noise and exposure — how each degrades AI face analysis accuracy and what minimum quality thresholds to aim for.">
+  <link rel="canonical" href="https://faceportal.example.com/blog/how-image-quality-affects-ai-analysis/">
+  <meta property="og:title" content="How Lighting and Image Quality Affect AI Face Analysis">
+  <meta property="og:description" content="Resolution, JPEG compression, blur and exposure — how each factor degrades AI analysis accuracy at a technical level.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/">Analyzer</a>
+      <a href="/blog/" class="active">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › How Image Quality Affects Face Analysis</div>
+
+    <div class="article-wrap">
+      <article>
+        <header class="article-header">
+          <div class="eyebrow">TECHNICAL</div>
+          <h1>How Lighting and Image Quality Affect AI Face Analysis</h1>
+          <p class="article-tagline">A technical look at resolution, compression, blur and exposure — and how each degrades analysis accuracy at specific stages of the pipeline.</p>
+          <div class="article-meta">FACE PORTAL · 8 MIN READ · IMAGE QUALITY</div>
+        </header>
+
+        <div class="article-content">
+          <p>An AI face analyzer is only as good as the image it receives. This is not a cliché — it reflects a specific technical reality: each stage of the analysis pipeline depends on different aspects of image quality, and degradation in any one aspect creates predictable failure modes in specific results. Understanding which quality factors affect which outputs helps you diagnose inaccurate results and know when to retake the photo versus when the current image is adequate.</p>
+
+          <h2 id="resolution">Resolution</h2>
+          <p>Resolution is the most fundamental quality constraint. The face region — not the full image, but the face itself — needs to contain enough pixels for the analysis models to operate on.</p>
+          <p>Face detection can work on very small face regions — reliable detection on face regions as small as 12×12 pixels has been demonstrated in academic literature, though practical tools typically require somewhat more. Landmark detection needs a larger region: a face area of roughly 80×80 pixels is considered a minimum for reliable 5-point landmark placement, and the 68-point model typically needs 100×100 or more for accurate placement of fine features like the lip vermillion border.</p>
+          <p>Feature classification — hair texture, eye color, skin texture for age estimation — needs more resolution still. Skin texture analysis requires resolving individual pores and fine lines, which means the face region should ideally contain at least 300×300 pixels. Eye color detection needs the iris to be at least 20–30 pixels in diameter to resolve color accurately.</p>
+          <p>In practical terms: a 12-megapixel smartphone photo of a head-and-shoulders portrait gives you a face region of roughly 1,500–2,000 pixels wide. This exceeds all the above requirements comfortably. A heavily cropped image, a photo where the face is a small element in a wider scene, or a photo taken with an early-generation phone camera may not.</p>
+
+          <h2 id="compression">JPEG Compression</h2>
+          <p>JPEG compression works by dividing the image into 8×8 pixel blocks and quantizing the frequency content of each block. At high quality settings (JPEG quality 90+), this quantization is barely perceptible. At low quality settings (quality below 60), the blocks become visible as a characteristic mosaic pattern — the "blockiness" of a heavily compressed image.</p>
+          <p>These block artifacts are particularly damaging for face analysis because they create false texture patterns that do not correspond to real skin structure. The age estimation model, which interprets high-frequency texture signals, may read compression artifacts as skin texture and produce a less accurate result. Hair texture analysis is similarly affected because the crisp boundaries in compressed JPEG blocks create artificial "lines" across the hair region.</p>
+          <p>A practical minimum for analysis: JPEG quality 75–80 or higher. Most smartphone photos saved to camera roll use quality 85–95 by default and are not a concern. The problem typically arises when photos have been shared through platforms that recompress aggressively (some messaging apps, some social media platforms in certain sharing modes) and then downloaded for re-analysis.</p>
+
+          <h2 id="blur">Blur Types and Their Effects</h2>
+          <p>Blur degrades spatial resolution even when the pixel count remains high. A 12-megapixel blurry photo provides the same number of pixels as a sharp one but far less useful information. Different types of blur create different problems:</p>
+
+          <h3>Motion blur</h3>
+          <p>Motion blur from subject movement during exposure creates directional smearing across facial features. A head that turned slightly during a half-second exposure produces a ghosted, streaky result. The landmark detector typically fails or produces low-confidence placements on heavily motion-blurred faces.</p>
+
+          <h3>Focus blur (out of focus)</h3>
+          <p>An out-of-focus face receives a radially symmetric point spread function — a circle of confusion around every sharp point in the scene. Unlike motion blur, it does not have a direction, but it equally destroys fine texture. A face that is blurry because it was not in the autofocus plane of a shallow-depth-of-field shot will receive lower landmark confidence, unreliable age estimates and poor hair texture analysis.</p>
+
+          <h3>Camera shake</h3>
+          <p>Camera shake is a type of motion blur where the camera rather than the subject moves during exposure. It produces directional blur similar to subject motion blur but often at a larger scale (because the camera moving by 1 degree displaces the image by far more than a slight subject head turn at the same angular extent).</p>
+
+          <h2 id="exposure">Exposure Problems</h2>
+
+          <h3>Overexposure</h3>
+          <p>When highlights are clipped — when skin in the brightest areas of the image reaches maximum digital value — the texture in those areas is destroyed. All the pixels in a clipped highlight region are the same maximum value, so no wrinkle, pore or tone variation is recorded. Age estimation from an overexposed face tends to be unreliable because the skin regions that carry the most texture information are exactly the areas that catch the most light.</p>
+
+          <h3>Underexposure</h3>
+          <p>Underexposed images are dark, which triggers noise amplification when the camera or software tries to brighten them. Digital noise looks like random color speckles in shadow areas and, at sufficient severity, across the entire image. Noise creates false texture signals that degrade age estimation and confound hair and skin color analysis.</p>
+
+          <h2 id="lighting">Lighting Direction and Quality</h2>
+          <p>Beyond exposure level, the direction and quality of the light creates shadow patterns that the AI cannot easily distinguish from real facial structure. A shadow cast by the nose across the upper lip mimics a mustache and may cause the model to report facial hair. Deep shadows in the eye sockets resemble aging markers and push age estimates higher. Specular highlights (bright reflections on the skin from a point light source) destroy local texture information at the highlight location.</p>
+          <p>Even, frontal soft light produces the most reliable analysis results across all categories. This is not because it makes the face look better — it is because it gives the model the most complete and unambiguous information about the face's actual structure.</p>
+
+          <div class="related-topics">
+            <div class="panel-title">RELATED TOPICS</div>
+            <span class="tag">Image Quality</span>
+            <span class="tag">Resolution</span>
+            <span class="tag">JPEG Compression</span>
+            <span class="tag">Motion Blur</span>
+            <span class="tag">Exposure</span>
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4>What is the minimum image size I should upload?</h4>
+              <p>For reliable feature analysis, the face region should be at least 200×200 pixels — which is satisfied by virtually any modern camera or smartphone photo of a head-and-shoulders subject. Passport photos and close selfies are well within range.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Does a screenshot of a photo produce worse results than the original?</h4>
+              <p>Often, yes. Screenshots are typically captured at screen resolution (72–96 DPI) rather than the original image resolution, and may be compressed again when saved. Where possible, upload the original image file directly.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Will a black-and-white photo work?</h4>
+              <p>Face detection and landmark placement work well on greyscale images. Eye color analysis cannot be performed on a black-and-white photograph. Hair color will be described as grey scale tones rather than actual color. Age and expression analysis are largely unaffected by the absence of color.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="toc-panel">
+          <div class="panel-title">CONTENTS</div>
+          <ul class="toc-list">
+            <li><a href="#resolution">Resolution</a></li>
+            <li><a href="#compression">JPEG Compression</a></li>
+            <li><a href="#blur">Blur Types</a></li>
+            <li><a href="#exposure">Exposure Problems</a></li>
+            <li><a href="#lighting">Lighting Direction</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-cta">
+          <div class="panel-title">TRY THE TOOL</div>
+          <div class="sidebar-cta-body">
+            <p>Test your image quality with the analyzer.</p>
+            <a href="/analyzer/">Open the Analyzer →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="related-articles">
+      <div class="panel-title">RELATED ARTICLES</div>
+      <div class="related-grid">
+        <a class="related-card" href="/blog/how-to-take-a-good-face-photo/">
+          <h4>How to Take a Good Photo for Face Analysis</h4>
+          <p>Practical steps to avoid the quality issues described in this article.</p>
+        </a>
+        <a class="related-card" href="/blog/portrait-photography-tips/">
+          <h4>Portrait Photography Tips</h4>
+          <p>Camera settings and lighting setups that produce high-quality portraits.</p>
+        </a>
+        <a class="related-card" href="/blog/how-ai-face-analysis-works/">
+          <h4>How AI Face Analysis Works</h4>
+          <p>The pipeline stages that image quality degrades.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · BLOG · <a href="/analyzer/" style="color:#555;text-decoration:none;">Use the Analyzer</a></footer>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

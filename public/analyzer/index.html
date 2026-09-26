@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Face Analyzer Tool | Face Portal</title>
+  <meta name="description" content="Upload a portrait photo and analyze visible facial features, apparent age range, expression, hair style and image quality with AI.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration:none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/analyzer/" class="active">Analyzer</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/analyzer/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <section class="intro">
+      <div>
+        <div class="eyebrow">AI FACE ANALYSIS PORTAL</div>
+        <h1>AI Face Analyzer</h1>
+        <p>Upload a portrait and analyze visible facial features, apparent age, expression, hair and image quality.</p>
+      </div>
+      <div class="notice">
+        <strong>Privacy note</strong>
+        <span>Your image is sent to the configured vision API for analysis only. This server does not store uploaded photos.</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-title">Upload Image</div>
+        <div class="panel-body">
+          <label class="dropzone" id="dropzone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            <div class="upload-icon">+</div>
+            <strong>Select a face image</strong>
+            <span>JPG, PNG, WEBP or GIF · max 8 MB</span>
+          </label>
+
+          <div class="preview-wrap hidden" id="previewWrap">
+            <img id="preview" alt="Selected image preview">
+            <button class="remove-btn" id="removeBtn" type="button">Remove image</button>
+          </div>
+
+          <button class="analyze-btn" id="analyzeBtn" type="button" disabled>
+            Analyze Image
+          </button>
+
+          <div class="error hidden" id="errorBox"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Analysis Results</div>
+        <div class="panel-body results" id="results">
+          <div class="empty">
+            <div class="empty-mark">?</div>
+            <strong>No analysis yet</strong>
+            <span>Upload an image and select "Analyze Image".</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel info-panel">
+      <div class="panel-title">What this tool reports</div>
+      <div class="info-grid">
+        <div><b>Face detection</b><span>Whether a face is clearly visible and the approximate number of faces.</span></div>
+        <div><b>Apparent age range</b><span>A cautious visual estimate, not a verified age.</span></div>
+        <div><b>Visible features</b><span>Non-sensitive visible traits such as glasses or facial hair.</span></div>
+        <div><b>Expression &amp; hair</b><span>Describes visible expression and hair color, texture and style.</span></div>
+      </div>
+    </section>
+
+    <section style="margin-top:32px;font-size:13px;color:#666;line-height:1.6;">
+      <p>Read more: <a href="/blog/how-ai-face-analysis-works/" style="color:var(--orange2);">How AI face analysis works</a> · <a href="/blog/how-to-take-a-good-face-photo/" style="color:var(--orange2);">Photo tips for better results</a> · <a href="/blog/face-analysis-privacy/" style="color:var(--orange2);">Privacy guide</a></p>
+    </section>
+  </main>
+
+  <footer>FACE PORTAL · CLASSIC WEB ANALYSIS INTERFACE</footer>
+  <script src="/app.js"></script>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

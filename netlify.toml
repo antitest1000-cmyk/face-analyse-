@@ -1,0 +1,8 @@
+[[redirects]]
+  from = "/api/analyze"
+  to = "/.netlify/functions/analyze"
+  status = 200
+
+[build]
+  publish = "public"
+  functions = "netlify/functions"

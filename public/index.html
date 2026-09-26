@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Face Analyzer: Free Online Face Analysis Tool</title>
+  <meta name="description" content="Upload your photo to our AI Face Analyzer. Explore apparent age, facial features, hairstyle, expression and image quality with detailed AI analysis.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .landing-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .landing-header h1 {
+      color: var(--orange);
+      margin-bottom: 15px;
+    }
+    .landing-header p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .content-wrapper {
+      margin-top: 50px;
+      line-height: 1.8;
+      font-size: 16px;
+      color: #e0e0e0;
+    }
+    
+    .content-wrapper h2 {
+      color: var(--orange);
+      font-size: 28px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .content-wrapper h3 {
+      color: var(--orange2);
+      font-size: 22px;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+
+    .content-wrapper p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .content-wrapper img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 30px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .toc {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--orange);
+      padding: 25px;
+      margin: 40px 0;
+      border-radius: 8px;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: white;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+    }
+
+    .toc li {
+      margin-bottom: 12px;
+    }
+
+    .toc a {
+      color: var(--orange2);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+      color: var(--orange);
+    }
+
+    .faq-container {
+      display: grid;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .faq-item {
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 6px;
+    }
+
+    .faq-item h4 {
+      margin: 0 0 10px 0;
+      color: white;
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+    
+    @media (max-width: 768px) {
+      .toc ul {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration: none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/" class="active">Analyzer</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="landing-header">
+      <h1>AI Face Analyzer</h1>
+      <p>Free Online Face Detection and Facial Feature Analysis Tool</p>
+    </div>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-title">Upload Your Photo</div>
+        <div class="panel-body">
+          <p style="margin-top: 0; margin-bottom: 20px; color: var(--muted);">Discover your visible facial features, apparent age range, hairstyle, facial expression and more.</p>
+          <label class="dropzone" id="dropzone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            <div class="upload-icon">+</div>
+            <strong>Choose Image</strong>
+            <span>JPG, PNG, WEBP or GIF · max 8 MB</span>
+          </label>
+
+          <div class="preview-wrap hidden" id="previewWrap">
+            <img id="preview" alt="Selected image preview">
+            <button class="remove-btn" id="removeBtn" type="button">Remove image</button>
+          </div>
+
+          <button class="analyze-btn" id="analyzeBtn" type="button" disabled>
+            Analyze Image
+          </button>
+
+          <div class="error hidden" id="errorBox"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Analysis Results</div>
+        <div class="panel-body results" id="results">
+          <div class="empty">
+            <div class="empty-mark">?</div>
+            <strong>Face Analysis Pending</strong>
+            <span>Upload an image to view face detection, apparent age, facial features, hair analysis, expression analysis, and image quality.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-wrapper">
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#intro">AI Face Analyzer: Discover the Details</a></li>
+          <li><a href="#what-is">What is an AI face analyzer?</a></li>
+          <li><a href="#how-to">How to analyze your face online</a></li>
+          <li><a href="#features">Detailed explanation of features</a></li>
+          <li><a href="#understanding">Understanding your analysis results</a></li>
+          <li><a href="#how-it-works">How AI face analysis works</a></li>
+          <li><a href="#benefits">Benefits and practical uses</a></li>
+          <li><a href="#quality">Photo quality tips</a></li>
+          <li><a href="#privacy">Privacy, limitations & responsible use</a></li>
+          <li><a href="#faq">Frequently asked questions</a></li>
+        </ul>
+      </div>
+
+      <h2 id="intro">AI Face Analyzer: Discover the Details in Your Photo</h2>
+      <p>Your face contains a wide range of visible details, from the shape of your eyebrows and the appearance of your eyes to your hairstyle, smile and facial structure. Our AI Face Analyzer helps you explore these characteristics using artificial intelligence and image analysis technology. The modern web offers powerful capabilities to process visual information rapidly, giving you insights into portraits and selfies in mere seconds.</p>
+      <p>Simply upload a photograph and let our online face analysis tool examine the visible features in your image. Receive an organized report covering face detection, estimated apparent age range, facial characteristics, hair appearance, expression, lighting and image quality. Whether you are curious about your facial features, exploring portrait photography or experimenting with artificial intelligence, our tool provides an accessible way to analyze a photo without specialized software.</p>
+      <p>The analyzer focuses on visible characteristics rather than determining personal identity or sensitive demographic information. Results are AI-generated visual estimates, not verified facts about a person. We prioritize safety and clarity, ensuring you have a fun, engaging, and informative experience interacting with cutting-edge computer vision systems directly through your browser.</p>
+
+      <h2 id="what-is">What is an AI face analyzer?</h2>
+      <p>An AI face analyzer is a specialized application that leverages deep learning, neural networks, and computer vision algorithms to evaluate and describe human faces within digital images. It automatically maps out a facial structure by identifying key landmarks such as the tip of the nose, the corners of the eyes, the jawline, and the contour of the lips. Through pattern recognition, the AI compares these landmarks against vast datasets of imagery to generate predictions and descriptions about visible facial features.</p>
+      <p>These advanced tools go beyond basic face detection. While a simple detector only draws a bounding box around a face, a comprehensive online face detection tool extracts nuanced data. It can deduce the apparent age, estimate facial proportions, analyze hair texture and styling, and evaluate micro-expressions. This capability forms the backbone of various applications across fields like digital avatar creation, automated portrait retouching, and biometric analysis. However, it is essential to remember that an AI apparent age estimator is making a statistical guess based on visual cues, not conducting a biological assessment.</p>
+
+      <h2 id="how-to">How to analyze your face online</h2>
+      <p>Analyzing your face online using our Free AI face analyzer is a straightforward process designed for simplicity and efficiency. We have structured our interface to ensure you can receive your comprehensive face analysis report in just a few clicks. First, ensure you have a suitable photograph. A high-quality image with good lighting, minimal shadows, and a clear, unobstructed view of the face yields the best results.</p>
+      <p>Next, use the 'Upload Your Photo' tool prominently displayed at the top of the page. You can drag and drop your image file or click to browse your device's storage. Supported formats include JPG, PNG, WEBP, and GIF, with a maximum file size of 8 MB to accommodate high-resolution portraits. Once the image preview is loaded, click the 'Analyze Image' button. Our system will securely transmit the image to our vision model for processing.</p>
+      <p>Within moments, the Analysis Results panel will populate with a detailed breakdown of your facial characteristics. You'll see distinct categories for face detection, apparent age, visible features, hair analysis, and expression analysis. If you wish to analyze a different photo, simply click 'Remove image' and repeat the process. Our online image analysis tool requires no registration, downloads, or complex configurations.</p>
+
+      <h2 id="features">Detailed explanation of features</h2>
+      <img src="https://images.openai.com/static-rsc-4/Cuz6m9Fz8rfjdPTEN0dgN3toKJ8j3uHjAJZCUw-8vzxsELIhXF2ErrOwIqfjhzMuiFJwhYkFt8h6wQYS7b7gAaknuOZ55K9ASvJxIf742AIDUBH3kubVBgvt_CPOCd0QntOx6Fj2yI4nFoCfsjlS90deJq9nWZ-UAA5cWpfFtr4?purpose=inline" alt="Facial Feature Analysis example showing detailed detection">
+      <h3>Facial Feature Analysis</h3>
+      <p>Our facial landmark analysis component is designed to meticulously examine the visible details of your primary facial components. This includes the eyes, eyebrows, nose, lips, jawline, and overall facial proportions. By mapping these features, the AI can suggest a general face shape analyzer result, categorizing the structure into common profiles like oval, square, round, or heart-shaped. You'll learn how different facial features contribute to the overall appearance of a portrait and how asymmetry or specific prominent features define a unique look.</p>
+
+      <img src="https://images.openai.com/static-rsc-4/i7qjPHQarpwwNypiJ_R4pXj26_bKCuWcqt42kjRacljy6BxgezkGuCqqyhEGlxHvkvD0EDkR_1GwfU4MPPj2JnhdCRnHMPUS5Ro1Ucit5anZ6lEy7IwcC21S1GZoHdqqD_ESLnZR83IL_37Egvd2g_rPdh-WQsirVQNPRCQBGhQ?purpose=inline" alt="Apparent Age and Expression Analysis">
+      <h3>Apparent Age and Expression</h3>
+      <p>Curious about how old you look to an unbiased machine? Explore a broad visual estimate of apparent age provided by our AI. Keep in mind that this AI apparent age estimator bases its findings strictly on visible skin texture, lighting, and common aging markers; it is not a factual verification of age. Alongside this, the facial expression analyzer evaluates the position of facial muscles to describe the visible emotion, such as a smile, a neutral resting face, or raised eyebrows indicating surprise.</p>
+
+      <img src="https://images.openai.com/static-rsc-4/Kc1r7bV6A4iLWM6emoLt5hOgmmItUgymryj87OaRs7cdZ5njRCfc8oWsS_E0znYWUWlmJtZRwRCdSUCyVC0fPZ9sYFsivzeWsk8tbBtRDOqZwsXn3J6iC5U0CyASKgYQ-GAAMnUY2IAYPbmNAVIZ_Wv5UBhkFzzteWqtiG1KJ8hk-q_ycGoDKjKlqmumxO80?purpose=inline" alt="Hair and Style Analysis">
+      <h3>Hair and Style Analysis</h3>
+      <p>The overall presentation of a face is heavily influenced by surrounding elements. Our AI hair analysis component discovers visible hair color, length, texture (e.g., straight, wavy, curly), and styling. It attempts to locate the hair parting and identify any visible accessories like glasses, hats, or prominent jewelry. These observable presentation details add depth to the AI portrait analyzer report, offering a holistic view of the subject's aesthetic presentation in the provided image.</p>
+
+      <img src="https://images.openai.com/static-rsc-4/tDneeGrsUGCr9dZhQImnhftzzQQ_ZL9UP-Qq5_57UIyF1EPGYlOjTTohg9GbKgTcux-hECofukp4HeWTR8PKeDsMu8RZlAJXyzk7a5z_bzy5zX6jSxGmqA67vIK-zVvSFMeR56LHm6dAHZVeBDovqNS00xBdTMSeQTukqz21tsDRl3OpY0jjU5UGMk49T8LV?purpose=inline" alt="Portrait Quality Analysis">
+      <h3>Portrait Quality Analysis</h3>
+      <p>The accuracy of any photo face analysis heavily depends on the source material. Therefore, our tool includes a section dedicated to portrait quality analysis. It helps you understand how environmental and technical factors—such as brightness, camera angle, harsh shadows, sharpness, and overall image resolution—can affect the details visible in your photograph. A blurry or poorly lit photo may result in less accurate landmark detection and skewed age or expression estimates.</p>
+
+      <h2 id="understanding">Understanding your analysis results</h2>
+      <p>Interpreting the output of our AI facial feature analysis requires an understanding of how machine learning models generate data. When you receive your report, you'll see a mix of categorical classifications and confidence scores. For example, the tool might state 'Expression: Smiling' with a high degree of certainty, while providing an 'Apparent Age' as a broad range (e.g., 25-35 years). It is crucial to view these results as statistical approximations.</p>
+      <p>The AI compares the pixels in your image against patterns it learned during its training phase. It does not 'know' you, nor does it possess human intuition. If the face shape analyzer categorizes your face as 'Oval', it means the mapped proportions mathematically align closest to that category within its database. Use these results for entertainment, curiosity, or basic image evaluation, but refrain from drawing serious personal conclusions or self-worth judgments based on automated metrics.</p>
+
+      <h2 id="how-it-works">How AI face analysis works</h2>
+      <p>At the core of our face detection from photo technology is a Convolutional Neural Network (CNN), a class of deep neural networks most commonly applied to analyzing visual imagery. When an image is uploaded, the first step is face detection—the model scans the image to locate the presence and boundaries of human faces. Once localized, the system performs facial landmark alignment, plotting dozens of points across the face to establish a geometric map.</p>
+      <p>This geometric map is then processed through specialized sub-models. One sub-model focuses on texture and lines to estimate age, another evaluates the curvature of the mouth and eyes for the facial expression analyzer, and yet another analyzes color gradients and contours for hair analysis. The aggregated data is then translated into the human-readable text you see in the results panel. This entire complex pipeline executes in milliseconds, showcasing the incredible speed of modern AI systems.</p>
+
+      <h2 id="benefits">Benefits and practical uses</h2>
+      <p>While often used for casual entertainment, an online image analysis tool has numerous practical applications. Portrait photographers can use it to objectively evaluate the lighting and mood of their shots. If the AI struggles to detect a face or misinterprets an expression, it might indicate that the lighting is too harsh or the angle is unflattering, prompting the photographer to adjust their setup. It serves as a rapid, automated second opinion on portrait quality.</p>
+      <p>Furthermore, developers and researchers use these tools to understand the capabilities and limitations of current computer vision models. By testing various images, one can learn how AI perceives different demographics, lighting conditions, and angles. It also provides a foundational understanding of the technologies powering modern conveniences, such as smartphone face unlock features, automated photo tagging on social media, and interactive augmented reality filters.</p>
+
+      <h2 id="quality">Photo quality tips</h2>
+      <p>To get the most accurate results from our free AI face analyzer, follow these essential photography guidelines. First, ensure optimal lighting. Natural, even lighting facing the subject is best. Avoid harsh backlighting or severe side shadows, as these can obscure facial landmarks and confuse the AI. Second, maintain a neutral camera angle. Photos taken directly at eye level yield the most accurate facial proportion and shape analysis compared to extreme high or low angles.</p>
+      <p>Third, minimize occlusions. Ensure hair is pulled back from the face, and avoid wearing sunglasses or heavy scarves if you want a complete analysis of your facial features. Finally, prioritize image resolution and sharpness. Blurry, heavily compressed, or pixelated images degrade the AI's ability to detect fine details like hair texture or subtle expressions. A standard, clear smartphone selfie or a professional headshot works perfectly.</p>
+
+      <h2 id="privacy">Privacy, limitations and responsible use</h2>
+      <p>We take user privacy seriously. The demo server hosting this AI face analyzer does not intentionally store, database, or distribute your uploaded images. Photos are securely transmitted to a configured third-party vision provider solely for the purpose of generating the analysis report in real-time. However, as with any online tool, we recommend reviewing the specific data-handling terms of the configured API provider and advise against uploading highly sensitive, confidential, or compromising photographs.</p>
+      <p>It is also important to acknowledge the limitations of AI. These tools are subject to biases present in their training data and may perform differently across various ages, skin tones, and ethnicities. The results are visual estimates and should never be used for medical diagnosis, psychological evaluation, or official identification purposes. We encourage responsible use of this technology, emphasizing curiosity and education over definitive judgment.</p>
+
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h4>What is an AI face analyzer?</h4>
+          <p>An AI face analyzer uses computer vision and image interpretation to examine visible characteristics in a photograph and generate a structured description of facial features, age, and expression.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How can I analyze my face online?</h4>
+          <p>Upload a supported image (JPG, PNG, WEBP), select 'Analyze Image' on our tool above, and wait for the system to return its detailed visual report.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can AI estimate my age from a photo?</h4>
+          <p>Some vision models can estimate a broad apparent age range based on skin texture and features, but lighting, camera angles, and other environmental factors can significantly affect accuracy.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can AI identify my face shape?</h4>
+          <p>A model may describe visible facial proportions and suggest a general face shape (like oval or square), but the result is an estimate rather than an exact, scientific measurement.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can the analyzer detect facial expressions?</h4>
+          <p>It can describe visible expressions, such as a smile, frown, or raised eyebrows. However, it cannot reliably establish a person's actual internal emotional state.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Does the tool recognize celebrities?</h4>
+          <p>No, this version of the tool focuses solely on analyzing features and does not identify people or match uploaded faces to real celebrities or individuals in a database.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I upload multiple faces?</h4>
+          <p>The tool can report an approximate number of visible faces in the photo, but it will typically focus its detailed feature analysis on the most prominent, primary face detected.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What image format should I use?</h4>
+          <p>JPG, PNG, WEBP, and GIF are suitable choices. For the best analysis, use a clear photograph with adequate lighting and a maximum file size of 8 MB.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Are my uploaded photos private?</h4>
+          <p>The demo server does not intentionally store uploaded images, but they are transmitted to the configured third-party vision provider for analysis. Review the provider's data-handling terms before uploading sensitive photos.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is the AI face analyzer accurate?</h4>
+          <p>Its results are estimates. They can be heavily affected by image quality, occlusion (like glasses or hair), lighting, camera angle, and the inherent limitations of the selected AI model.</p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <footer>FACE PORTAL · CLASSIC WEB ANALYSIS INTERFACE</footer>
+  
+  <script src="/app.js"></script>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
