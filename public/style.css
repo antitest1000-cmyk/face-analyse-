@@ -844,12 +844,12 @@ footer {
   .topnav { display: none; }
 }
 
-/* ── Old School Retro Processing Terminal & Laser Scan Animation ── */
+/* ── Theme-Matched Retro Processing & Scan Animation ── */
 .preview-wrap.scanning {
   position: relative;
   overflow: hidden;
-  border: 2px solid #00ff66 !important;
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+  border: 2px solid var(--orange2) !important;
+  box-shadow: 0 0 16px rgba(239, 104, 40, 0.45);
 }
 
 .preview-wrap.scanning::after {
@@ -859,27 +859,28 @@ footer {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, transparent, #00ff66, #ffffff, #00ff66, transparent);
-  box-shadow: 0 0 15px #00ff66, 0 0 25px #00ff66;
+  background: linear-gradient(90deg, transparent, var(--orange2), #ffffff, var(--orange2), transparent);
+  box-shadow: 0 0 15px var(--orange2), 0 0 25px var(--orange);
   animation: laserScan 1.6s ease-in-out infinite alternate;
   z-index: 10;
 }
 
 .preview-wrap.scanning::before {
-  content: "[ + ] FACIAL MATRIX TARGET LOCKED";
+  content: "ANALYZING FACIAL FEATURES...";
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(0, 0, 0, 0.85);
-  color: #00ff66;
-  font-family: 'Courier New', Courier, monospace;
+  background: rgba(29, 30, 32, 0.92);
+  color: var(--orange2);
+  font-family: inherit;
   font-size: 11px;
-  font-weight: bold;
-  padding: 4px 9px;
-  border: 1px solid #00ff66;
+  font-weight: 800;
+  padding: 5px 11px;
+  border: 1px solid var(--orange2);
   z-index: 11;
-  letter-spacing: 1px;
-  text-shadow: 0 0 5px #00ff66;
+  letter-spacing: 0.8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes laserScan {
@@ -887,118 +888,128 @@ footer {
   100% { top: calc(100% - 4px); }
 }
 
-.retro-terminal {
-  background: #090c10;
-  border: 2px solid #00ff66;
+.processing-panel {
+  background: var(--panel2);
+  border: 1px solid #464749;
   border-radius: 6px;
-  padding: 20px;
-  font-family: 'Courier New', Courier, monospace;
-  color: #00ff66;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.15), 0 0 15px rgba(0, 0, 0, 0.8);
+  padding: 22px;
   min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.retro-terminal::before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-  z-index: 2;
-  background-size: 100% 3px, 6px 100%;
-  pointer-events: none;
-}
-
-.retro-header {
-  border-bottom: 1px dashed #00ff66;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+.processing-header {
+  border-bottom: 1px solid #3a3b3d;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+}
+
+.processing-title {
+  color: var(--orange);
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.processing-badge {
+  background: #343537;
+  border: 1px solid #666;
+  color: var(--orange2);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  letter-spacing: 0.5px;
+}
+
+.processing-logs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.processing-log-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 15px;
+  padding: 12px 14px;
+  background: #191a1c;
+  border: 1px solid #333436;
   font-size: 13px;
-  letter-spacing: 1.5px;
-  text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
-  z-index: 3;
+  transition: all 0.25s ease;
+  border-radius: 4px;
 }
 
-.retro-body {
-  flex: 1;
-  font-size: 13px;
-  line-height: 1.75;
-  z-index: 3;
+.processing-log-item.active {
+  border-color: var(--orange2);
+  background: #242528;
+  box-shadow: 0 0 10px rgba(239, 104, 40, 0.15);
 }
 
-.retro-log {
-  margin: 6px 0;
-  color: #00ff66;
-  text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
-  opacity: 0.85;
+.processing-log-item .log-label {
+  color: var(--orange2);
+  font-weight: 800;
 }
 
-.retro-log.active {
-  color: #ffffff;
-  font-weight: bold;
-  text-shadow: 0 0 8px #ffffff;
-  opacity: 1;
+.processing-log-item .log-text {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.retro-progress-wrap {
-  margin-top: 20px;
-  border-top: 1px dashed #00ff66;
-  padding-top: 15px;
-  z-index: 3;
+.processing-progress-wrap {
+  border-top: 1px solid #3a3b3d;
+  padding-top: 16px;
 }
 
-.retro-progress-title {
-  font-size: 12px;
-  margin-bottom: 8px;
+.processing-progress-info {
   display: flex;
   justify-content: space-between;
-  letter-spacing: 1px;
-  text-shadow: 0 0 5px #00ff66;
-}
-
-.retro-progress-bar {
-  background: #051a0d;
-  border: 1px solid #00ff66;
-  height: 22px;
-  padding: 2px;
-  position: relative;
-}
-
-.retro-progress-fill {
-  height: 100%;
-  background: repeating-linear-gradient(90deg, #00ff66, #00ff66 8px, #051a0d 8px, #051a0d 12px);
-  width: 0%;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
-}
-
-.cursor-blink {
-  display: inline-block;
-  width: 9px;
-  height: 14px;
-  background: #00ff66;
-  vertical-align: middle;
-  margin-left: 4px;
-  animation: blink 0.8s infinite;
-  box-shadow: 0 0 8px #00ff66;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.radar-spin {
-  display: inline-block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
   font-weight: bold;
 }
+
+.processing-progress-bar {
+  height: 18px;
+  background: #141517;
+  border: 1px solid #48494b;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.processing-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--orange2));
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(239, 104, 40, 0.6);
+}
+
+.spinner-icon {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 123, 37, 0.3);
+  border-top-color: var(--orange2);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 

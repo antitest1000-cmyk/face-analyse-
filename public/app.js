@@ -236,70 +236,71 @@ analyzeBtn.addEventListener("click", async () => {
   // Start Old School Retro Laser Scan Animation on Preview
   previewWrap.classList.add("scanning");
 
-  // Render Retro CRT Terminal in Results panel
+  // Render Theme-Matched Processing Panel in Results panel
   results.innerHTML = `
-    <div class="retro-terminal">
-      <div class="retro-header">
-        <span>[SYS_VER: 2.4.0_AI]</span>
-        <span>RADAR: <span class="radar-spin" id="retroRadar">/</span></span>
-      </div>
-      <div class="retro-body" id="retroLogs">
-        <div class="retro-log active">> INITIATING FACIAL MATRIX SCAN... <span class="cursor-blink"></span></div>
-      </div>
-      <div class="retro-progress-wrap">
-        <div class="retro-progress-title">
-          <span>PROCESSING IMAGE BIOMETRICS</span>
-          <span id="retroPercent">0%</span>
+    <div class="processing-panel">
+      <div class="processing-header">
+        <div class="processing-title">
+          <span class="spinner-icon"></span> Analyzing Image Biometrics
         </div>
-        <div class="retro-progress-bar">
-          <div class="retro-progress-fill" id="retroFill"></div>
+        <div class="processing-badge">NEURAL NET ACTIVE</div>
+      </div>
+      <div class="processing-logs" id="processingLogs">
+        <div class="processing-log-item active">
+          <div class="log-label">Step 1</div>
+          <div class="log-text">Detecting facial contours & landmarks... <span class="spinner-icon"></span></div>
+        </div>
+      </div>
+      <div class="processing-progress-wrap">
+        <div class="processing-progress-info">
+          <span>AI Vision Analysis</span>
+          <span id="processingPercent">0%</span>
+        </div>
+        <div class="processing-progress-bar">
+          <div class="processing-progress-fill" id="processingFill"></div>
         </div>
       </div>
     </div>
   `;
 
-  const radarChars = ["/", "-", "\\", "|"];
-  let radarIdx = 0;
-  const radarTimer = setInterval(() => {
-    radarIdx = (radarIdx + 1) % radarChars.length;
-    const el = document.getElementById("retroRadar");
-    if (el) el.textContent = radarChars[radarIdx];
-  }, 150);
-
-  const logs = [
-    "> DETECTING FACIAL BOUNDING BOXES & CONTOURS...",
-    "> ANALYZING EYE COLOR, EXPRESSION & HAIRSTYLE...",
-    "> CONSULTING GEMINI NEURAL NET CORE...",
-    "> DECODING FACIAL VIBE & APPARENT AGE...",
-    "> SYNTHESIZING BIOMETRIC REPORT..."
+  const steps = [
+    { label: "Step 2", text: "Analyzing apparent age & facial structure..." },
+    { label: "Step 3", text: "Evaluating expression, hair style & eye details..." },
+    { label: "Step 4", text: "Consulting Gemini vision model core..." },
+    { label: "Step 5", text: "Synthesizing full biometric report..." }
   ];
 
   let progress = 0;
-  let logIdx = 0;
+  let stepIdx = 0;
 
   const animTimer = setInterval(() => {
     if (progress < 92) {
       progress += Math.floor(Math.random() * 8) + 4;
       if (progress > 92) progress = 92;
 
-      const fill = document.getElementById("retroFill");
-      const pct = document.getElementById("retroPercent");
+      const fill = document.getElementById("processingFill");
+      const pct = document.getElementById("processingPercent");
       if (fill) fill.style.width = progress + "%";
       if (pct) pct.textContent = progress + "%";
 
-      if (progress > (logIdx + 1) * 18 && logIdx < logs.length) {
-        const retroLogs = document.getElementById("retroLogs");
-        if (retroLogs) {
-          const activeLog = retroLogs.querySelector(".retro-log.active");
-          if (activeLog) {
-            activeLog.classList.remove("active");
-            activeLog.innerHTML = activeLog.innerText; // remove cursor
+      if (progress > (stepIdx + 1) * 20 && stepIdx < steps.length) {
+        const logsContainer = document.getElementById("processingLogs");
+        if (logsContainer) {
+          const activeItem = logsContainer.querySelector(".processing-log-item.active");
+          if (activeItem) {
+            activeItem.classList.remove("active");
+            const sp = activeItem.querySelector(".spinner-icon");
+            if (sp) sp.remove();
           }
+          const stepObj = steps[stepIdx];
           const newDiv = document.createElement("div");
-          newDiv.className = "retro-log active";
-          newDiv.innerHTML = `${logs[logIdx]} <span class="cursor-blink"></span>`;
-          retroLogs.appendChild(newDiv);
-          logIdx++;
+          newDiv.className = "processing-log-item active";
+          newDiv.innerHTML = `
+            <div class="log-label">${stepObj.label}</div>
+            <div class="log-text">${stepObj.text} <span class="spinner-icon"></span></div>
+          `;
+          logsContainer.appendChild(newDiv);
+          stepIdx++;
         }
       }
     }
@@ -332,8 +333,8 @@ analyzeBtn.addEventListener("click", async () => {
     }
 
     // Complete progress bar animation right before rendering
-    const fill = document.getElementById("retroFill");
-    const pct = document.getElementById("retroPercent");
+    const fill = document.getElementById("processingFill");
+    const pct = document.getElementById("processingPercent");
     if (fill) fill.style.width = "100%";
     if (pct) pct.textContent = "100%";
 
@@ -348,7 +349,6 @@ analyzeBtn.addEventListener("click", async () => {
     `;
     showError(error.message);
   } finally {
-    clearInterval(radarTimer);
     clearInterval(animTimer);
     previewWrap.classList.remove("scanning");
     analyzeBtn.disabled = !selectedFile;
