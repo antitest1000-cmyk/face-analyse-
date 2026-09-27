@@ -269,45 +269,51 @@ DETAILED ANALYSIS RULES:
 25. Never turn uncertainty into certainty simply to make the result look complete.
 `;
 
-    const model = "gemini-1.5-flash";
     const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    const modelsToTry = ["gemini-3.1-flash-lite", "gemini-flash-latest", "gemini-2.5-flash"];
+    let response, raw, usedModel;
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            role: "user",
-            parts: [
-              { text: prompt },
-              {
-                inlineData: {
-                  mimeType: mimeType,
-                  data: imageBase64
-                }
+    const payload = JSON.stringify({
+      contents: [
+        {
+          role: "user",
+          parts: [
+            { text: prompt },
+            {
+              inlineData: {
+                mimeType: mimeType,
+                data: imageBase64
               }
-            ]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.1,
-          maxOutputTokens: 8000,
-          responseMimeType: "application/json"
+            }
+          ]
         }
-      })
+      ],
+      generationConfig: {
+        temperature: 0.1,
+        maxOutputTokens: 8000,
+        responseMimeType: "application/json"
+      }
     });
 
-    const raw = await response.text();
+    for (const modelCandidate of modelsToTry) {
+      usedModel = modelCandidate;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelCandidate}:generateContent?key=${apiKey}`;
 
-    if (!response.ok) {
+      response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload
+      });
+
+      raw = await response.text();
+      if (response.ok) break;
+    }
+
+    if (!response || !response.ok) {
       return {
-        statusCode: response.status,
+        statusCode: response ? response.status : 500,
         headers: corsHeaders,
-        body: JSON.stringify({ error: "Gemini API request failed.", details: raw.slice(0, 1200) })
+        body: JSON.stringify({ error: "Gemini API request failed.", details: raw ? raw.slice(0, 1200) : "No response" })
       };
     }
 
@@ -360,7 +366,7 @@ DETAILED ANALYSIS RULES:
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: JSON.stringify({ ...result, model: "gemini-1.5-flash" })
+      body: JSON.stringify({ ...result, model: usedModel || "gemini-flash-latest" })
     };
 
   } catch (error) {
