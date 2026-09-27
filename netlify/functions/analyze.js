@@ -14,11 +14,11 @@ export const handler = async (event) => {
   }
 
   try {
-    if (!process.env.OPENROUTER_API_KEY) {
+    if (!process.env.GEMINI_API_KEY) {
       return {
         statusCode: 500,
         headers: corsHeaders,
-        body: JSON.stringify({ error: "OPENROUTER_API_KEY is not configured." })
+        body: JSON.stringify({ error: "GEMINI_API_KEY is not configured." })
       };
     }
 
@@ -269,75 +269,50 @@ DETAILED ANALYSIS RULES:
 25. Never turn uncertainty into certainty simply to make the result look complete.
 `;
 
-    const primaryModel = process.env.OPENROUTER_MODEL || "google/gemini-3-flash-preview";
-    const fallbackModels = [
-      "google/gemini-flash-1.5-exp:free",
-      "meta-llama/llama-3.2-11b-vision-instruct:free", 
-      "google/gemini-pro-1.5-exp:free"
-    ];
-    
-    // Create a unique list of models to try, starting with the primary
-    const modelsToTry = [...new Set([primaryModel, ...fallbackModels])];
-    
-    let response;
-    let raw;
-    let usedModel;
-    let lastErrorDetails = "";
+    const model = "gemini-1.5-flash";
+    const apiKey = process.env.GEMINI_API_KEY;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-    for (const modelToTry of modelsToTry) {
-      usedModel = modelToTry;
-      try {
-        response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://face-portal.netlify.app",
-            "X-Title": "Face Portal"
-          },
-          body: JSON.stringify({
-            model: modelToTry,
-            messages: [
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts: [
+              { text: prompt },
               {
-                role: "user",
-                content: [
-                  { type: "text", text: prompt },
-                  { type: "image_url", image_url: { url: dataUrl } }
-                ]
+                inlineData: {
+                  mimeType: mimeType,
+                  data: imageBase64
+                }
               }
-            ],
-            temperature: 0.1,
-            max_tokens: 8000
-          })
-        });
-
-        raw = await response.text();
-
-        // If successful, break out of the retry loop
-        if (response.ok) {
-          break;
-        } else {
-          lastErrorDetails = raw.slice(0, 1200);
-          // If it's a 402 Payment Required or 429 Rate Limit, we continue to the next fallback model.
-          if (response.status !== 402 && response.status !== 429) {
-             break; // If it's a different error, break and return that error.
+            ]
           }
+        ],
+        generationConfig: {
+          temperature: 0.1,
+          maxOutputTokens: 8000,
+          responseMimeType: "application/json"
         }
-      } catch (err) {
-        lastErrorDetails = err.message;
-      }
-    }
+      })
+    });
 
-    if (!response || !response.ok) {
+    const raw = await response.text();
+
+    if (!response.ok) {
       return {
-        statusCode: response ? response.status : 500,
+        statusCode: response.status,
         headers: corsHeaders,
-        body: JSON.stringify({ error: "Vision API request failed on all fallback models.", details: lastErrorDetails })
+        body: JSON.stringify({ error: "Gemini API request failed.", details: raw.slice(0, 1200) })
       };
     }
 
     const apiData = JSON.parse(raw);
-    const content = apiData?.choices?.[0]?.message?.content;
+    const content = apiData?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!content) {
       return {
@@ -385,7 +360,7 @@ DETAILED ANALYSIS RULES:
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: JSON.stringify({ ...result, model })
+      body: JSON.stringify({ ...result, model: "gemini-1.5-flash" })
     };
 
   } catch (error) {
