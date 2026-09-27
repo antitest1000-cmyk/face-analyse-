@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404: Page Not Found - FacePortal</title>
+  <meta name="description" content="The requested page could not be found on FacePortal. Return to the AI Face Analyzer or explore our blog.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .error-container {
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      margin: 40px auto;
+      max-width: 680px;
+    }
+
+    .error-code {
+      font-family: Georgia, serif;
+      font-size: clamp(80px, 15vw, 130px);
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      margin: 0 0 10px 0;
+      text-shadow: 0 4px 20px rgba(239, 104, 40, 0.25);
+    }
+
+    .error-badge {
+      display: inline-block;
+      background: #343537;
+      border: 1px solid #666;
+      color: var(--orange2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .error-title {
+      font-family: Georgia, serif;
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--text);
+      margin: 0 0 14px 0;
+    }
+
+    .error-message {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 0 32px 0;
+      max-width: 500px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-home {
+      background: var(--orange);
+      color: white;
+      text-decoration: none;
+      padding: 13px 28px;
+      font-weight: 800;
+      font-size: 15px;
+      border: 1px solid #ff8a45;
+      display: inline-block;
+      transition: background 0.15s;
+    }
+
+    .btn-home:hover {
+      background: var(--orange2);
+    }
+
+    .btn-blog {
+      background: transparent;
+      color: var(--orange2);
+      text-decoration: none;
+      padding: 13px 28px;
+      font-weight: 800;
+      font-size: 15px;
+      border: 1px solid var(--orange2);
+      display: inline-block;
+      transition: background 0.15s;
+    }
+
+    .btn-blog:hover {
+      background: rgba(239, 104, 40, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="brand" style="text-decoration: none;">Face<span>Portal</span></a>
+    <nav class="topnav">
+      <a href="/">Analyzer</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <div class="status-dot" title="Online"></div>
+  </header>
+
+  <div id="dropdownMenu" class="dropdown hidden">
+    <a href="/">Analyzer</a>
+    <a href="/blog/">Blog</a>
+  </div>
+
+  <main class="page">
+    <div class="error-container">
+      <div class="error-badge">404 Error</div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-message">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+      <div class="error-actions">
+        <a href="/" class="btn-home">Go to AI Face Analyzer</a>
+        <a href="/blog/" class="btn-blog">Explore Blog</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>FACE PORTAL · CLASSIC WEB ANALYSIS INTERFACE</footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('dropdownMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
