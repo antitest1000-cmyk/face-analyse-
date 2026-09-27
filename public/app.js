@@ -233,19 +233,82 @@ analyzeBtn.addEventListener("click", async () => {
   analyzeBtn.disabled = true;
   analyzeBtn.textContent = "Analyzing...";
 
+  // Start Old School Retro Laser Scan Animation on Preview
+  previewWrap.classList.add("scanning");
+
+  // Render Retro CRT Terminal in Results panel
   results.innerHTML = `
-    <div class="empty">
-      <div class="empty-mark">...</div>
-      <strong>Analyzing image</strong>
-      <span>Sending the image to the configured vision model.</span>
+    <div class="retro-terminal">
+      <div class="retro-header">
+        <span>[SYS_VER: 2.4.0_AI]</span>
+        <span>RADAR: <span class="radar-spin" id="retroRadar">/</span></span>
+      </div>
+      <div class="retro-body" id="retroLogs">
+        <div class="retro-log active">> INITIATING FACIAL MATRIX SCAN... <span class="cursor-blink"></span></div>
+      </div>
+      <div class="retro-progress-wrap">
+        <div class="retro-progress-title">
+          <span>PROCESSING IMAGE BIOMETRICS</span>
+          <span id="retroPercent">0%</span>
+        </div>
+        <div class="retro-progress-bar">
+          <div class="retro-progress-fill" id="retroFill"></div>
+        </div>
+      </div>
     </div>
   `;
 
-  // Convert image to base64 and send as JSON (works with both Express & Netlify Functions)
+  const radarChars = ["/", "-", "\\", "|"];
+  let radarIdx = 0;
+  const radarTimer = setInterval(() => {
+    radarIdx = (radarIdx + 1) % radarChars.length;
+    const el = document.getElementById("retroRadar");
+    if (el) el.textContent = radarChars[radarIdx];
+  }, 150);
+
+  const logs = [
+    "> DETECTING FACIAL BOUNDING BOXES & CONTOURS...",
+    "> ANALYZING EYE COLOR, EXPRESSION & HAIRSTYLE...",
+    "> CONSULTING GEMINI NEURAL NET CORE...",
+    "> DECODING FACIAL VIBE & APPARENT AGE...",
+    "> SYNTHESIZING BIOMETRIC REPORT..."
+  ];
+
+  let progress = 0;
+  let logIdx = 0;
+
+  const animTimer = setInterval(() => {
+    if (progress < 92) {
+      progress += Math.floor(Math.random() * 8) + 4;
+      if (progress > 92) progress = 92;
+
+      const fill = document.getElementById("retroFill");
+      const pct = document.getElementById("retroPercent");
+      if (fill) fill.style.width = progress + "%";
+      if (pct) pct.textContent = progress + "%";
+
+      if (progress > (logIdx + 1) * 18 && logIdx < logs.length) {
+        const retroLogs = document.getElementById("retroLogs");
+        if (retroLogs) {
+          const activeLog = retroLogs.querySelector(".retro-log.active");
+          if (activeLog) {
+            activeLog.classList.remove("active");
+            activeLog.innerHTML = activeLog.innerText; // remove cursor
+          }
+          const newDiv = document.createElement("div");
+          newDiv.className = "retro-log active";
+          newDiv.innerHTML = `${logs[logIdx]} <span class="cursor-blink"></span>`;
+          retroLogs.appendChild(newDiv);
+          logIdx++;
+        }
+      }
+    }
+  }, 350);
+
+  // Convert image to base64 and send as JSON
   const toBase64 = (file) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
-      // strip the "data:image/xxx;base64," prefix
       const base64 = reader.result.split(",")[1];
       resolve(base64);
     };
@@ -268,6 +331,12 @@ analyzeBtn.addEventListener("click", async () => {
       throw new Error(data.error || "Analysis failed.");
     }
 
+    // Complete progress bar animation right before rendering
+    const fill = document.getElementById("retroFill");
+    const pct = document.getElementById("retroPercent");
+    if (fill) fill.style.width = "100%";
+    if (pct) pct.textContent = "100%";
+
     renderResults(data);
   } catch (error) {
     results.innerHTML = `
@@ -279,6 +348,9 @@ analyzeBtn.addEventListener("click", async () => {
     `;
     showError(error.message);
   } finally {
+    clearInterval(radarTimer);
+    clearInterval(animTimer);
+    previewWrap.classList.remove("scanning");
     analyzeBtn.disabled = !selectedFile;
     analyzeBtn.textContent = "Analyze Image";
   }

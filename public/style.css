@@ -843,3 +843,162 @@ footer {
 @media (max-width: 768px) {
   .topnav { display: none; }
 }
+
+/* ── Old School Retro Processing Terminal & Laser Scan Animation ── */
+.preview-wrap.scanning {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #00ff66 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+}
+
+.preview-wrap.scanning::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #00ff66, #ffffff, #00ff66, transparent);
+  box-shadow: 0 0 15px #00ff66, 0 0 25px #00ff66;
+  animation: laserScan 1.6s ease-in-out infinite alternate;
+  z-index: 10;
+}
+
+.preview-wrap.scanning::before {
+  content: "[ + ] FACIAL MATRIX TARGET LOCKED";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #00ff66;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 9px;
+  border: 1px solid #00ff66;
+  z-index: 11;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #00ff66;
+}
+
+@keyframes laserScan {
+  0% { top: 0%; }
+  100% { top: calc(100% - 4px); }
+}
+
+.retro-terminal {
+  background: #090c10;
+  border: 2px solid #00ff66;
+  border-radius: 6px;
+  padding: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ff66;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.15), 0 0 15px rgba(0, 0, 0, 0.8);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.retro-terminal::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 2;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+.retro-header {
+  border-bottom: 1px dashed #00ff66;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
+  z-index: 3;
+}
+
+.retro-body {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.75;
+  z-index: 3;
+}
+
+.retro-log {
+  margin: 6px 0;
+  color: #00ff66;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+  opacity: 0.85;
+}
+
+.retro-log.active {
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 0 8px #ffffff;
+  opacity: 1;
+}
+
+.retro-progress-wrap {
+  margin-top: 20px;
+  border-top: 1px dashed #00ff66;
+  padding-top: 15px;
+  z-index: 3;
+}
+
+.retro-progress-title {
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #00ff66;
+}
+
+.retro-progress-bar {
+  background: #051a0d;
+  border: 1px solid #00ff66;
+  height: 22px;
+  padding: 2px;
+  position: relative;
+}
+
+.retro-progress-fill {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #00ff66, #00ff66 8px, #051a0d 8px, #051a0d 12px);
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 9px;
+  height: 14px;
+  background: #00ff66;
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+  box-shadow: 0 0 8px #00ff66;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.radar-spin {
+  display: inline-block;
+  font-weight: bold;
+}
+
